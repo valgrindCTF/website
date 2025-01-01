@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>valgrind (CLI mode)</title>
+    <link rel="stylesheet" href="/static/xterm/css/xterm.css" />
+    <link rel="stylesheet" href="/static/css/cli.css" />
+    <script src="/static/xterm/lib/xterm.js"></script>
+    <script src="/static/xterm/addon-fit/lib/addon-fit.js"></script>
+</head>
+<body>
+    <div id="terminal"></div>
+    <script>
+        const term = new Terminal({
+            fontFamily: '"JetBrains Mono", monospace',
+            fontSize: 14,
+            cursorBlink: true,
+            theme: {
+                background: '#13051c',
+                foreground: '#fff',
+                cursor: '#e794ff',
+                cursorAccent: '#13051c',
+                selection: '#260b38',
+                black: '#292b2e',
+                red: '#770018',
+                green: '#006624',
+                yellow: '#fb4e9b',
+                blue: '#cb93ff',
+                magenta: '#e794ff',
+                cyan: '#f1a0b0',
+                white: '#fff',
+                brightBlack: '#292b2e',
+                brightRed: '#6b0015',
+                brightGreen: '#006122',
+                brightYellow: '#fb4e9b',
+                brightBlue: '#cb93ff',
+                brightMagenta: '#e794ff',
+                brightCyan: '#f1a0b0',
+                brightWhite: '#fff'
+            }
+        });
+        
+        const fitAddon = new FitAddon.FitAddon();
+        term.loadAddon(fitAddon);
+        term.open(document.getElementById('terminal'));
+        fitAddon.fit();
+
+        window.addEventListener('resize', () => {
+            fitAddon.fit();
+        });
+
+        const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+        
+        // Typing animation function
+        async function typeText(text, delay = 20) {
+            for (const char of text) {
+                term.write(char);
+                await sleep(delay);
+            }
+        }
+        
+        // Initial sequence
+        async function playIntro() {
+            term.write('$ ');
+            await sleep(500);
+            await typeText('nc valgrindc.tf 1337');
+            await sleep(200);
+            term.writeln('');
+            term.write('valgrind@web:~$ ');
+        }
+        
+        playIntro();
+        
+        function generatePrompt(cwd) {
+            return `valgrind@web:${cwd}$ `;
+        }
+
+        var fs = {
+            '/': {
+                type: 'dir',
+                contents: {
+                    'bin': {
+                        type: 'dir',
+                        contents: {
+                            'ls': { type: 'file', executable: true },
+                            'cd': { type: 'file', executable: true },
+                            'pwd': { type: 'file', executable: true },
+                            'cat': { type: 'file', executable: true },
+                            'echo': { type: 'file', executable: true },
+                            'help': { type: 'file', executable: true }
+                        }
+                    },
+                    'home': {
+                        type: 'dir',
+                        contents: {
+                            'valgrind': {
+                                type: 'dir',
+                                contents: {
+                                    'README': { type: 'file', content: 'This CLI is under construction... check back later!' }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        };
+        
+        const commands = {
+            ls: (args) => {
+                // List directory contents
+                let path = args[0] || cwd;
+                let dir = resolvePathToObject(path);
+                if (!dir || dir.type !== 'dir') return 'ls: not a directory';
+                return Object.keys(dir.contents).join('  ');
+            },
+            cd: (args) => {
+                // Change directory
+                if (!args[0]) {
+                    cwd = '/home/valgrind';
+                    return '';
+                }
+                let newPath = resolvePath(args[0]);
+                let dir = resolvePathToObject(newPath);
+                if (!dir || dir.type !== 'dir') return 'cd: not a directory';
+                cwd = newPath;
+                return '';
+            },
+            pwd: () => {
+                // Print working directory
+                return cwd;
+            },
+            cat: (args) => {
+                // Display file contents
+                if (!args[0]) return 'cat: missing operand';
+                let file = resolvePathToObject(args[0]);
+                if (!file || file.type !== 'file') return 'cat: no such file';
+                return file.content || '';
+            },
+            echo: (args) => {
+                // Echo arguments
+                return args.join(' ');
+            },
+            help: () => {
+                // Show available commands
+                return 'Available commands: ' + Object.keys(commands).join(', ');
+            }
+        };
+        
+        function resolvePathToObject(path) {
+            if (!path) return null;
+        
+            path = path.replace(/^~/, '/home/valgrind');
+            
+            let current = path.startsWith('/') ? fs['/'] : resolvePathToObject(cwd);
+            if (!current) return null;
+        
+            const parts = path.split('/').filter(p => p);
+        
+            for (let i = 0; i < parts.length; i++) {
+                const part = parts[i];
+                
+                if (part === '.') continue;
+                
+                if (part === '..') {
+                    parts.splice(i - 1, 2);
+                    i -= 2;
+                    continue;
+                }
+        
+                if (!current.contents || !current.contents[part]) {
+                    return null;
+                }
+                current = current.contents[part];
+            }
+        
+            return current;
+        }
+        
+        function resolvePath(path) {
+            if (path.startsWith('/')) return path;
+            return cwd + '/' + path;
+        }
+
+        var cwd = '~';
+        var buffer = '';
+
+        function parseCommand(input) {
+            const parts = input.trim().split(/\s+/);
+            return {
+                cmd: parts[0],
+                args: parts.slice(1)
+            };
+        }
+
+        function executeCommand(input) {
+            if (!input.trim()) return '';
+            
+            const {cmd, args} = parseCommand(input);
+            if (!commands[cmd]) {
+                return `${cmd}: command not found`;
+            }
+            return commands[cmd](args);
+        }
+
+        function resolvePath(path) {
+            if (!path) return cwd;
+            path = path.replace(/^~/, '/home/valgrind');
+            if (path.startsWith('/')) return path;
+            return (cwd === '~' ? '/home/valgrind' : cwd) + '/' + path;
+        }
+
+        // Update the onKey handler
+        term.onKey(e => {
+            const printable = !e.domEvent.altKey && !e.domEvent.altGraphKey && 
+                            !e.domEvent.ctrlKey && !e.domEvent.metaKey;
+
+            if (e.domEvent.keyCode === 13) { // Enter
+                term.writeln('');
+                const output = executeCommand(buffer);
+                if (output) {
+                    term.writeln(output);
+                }
+                term.write(generatePrompt(cwd));
+                buffer = '';
+            } else if (e.domEvent.keyCode === 8) { // Backspace
+                if (buffer.length > 0) {
+                    term.write('\b \b');
+                    buffer = buffer.slice(0, -1);
+                }
+            } else if (printable) {
+                term.write(e.key);
+                buffer += e.key;
+            }
+        });
+
+    </script>
+</body>
+</html>

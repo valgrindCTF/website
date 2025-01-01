@@ -1,0 +1,19 @@
+{% extends "_common.html" %}
+
+{% block title %}All Posts | valgrind{% endblock %}
+
+{% block main %}
+<div class="content-wrapper">
+    <div class="post-preview-list">
+        <h1>All Posts</h1>
+        {% for post in posts %}
+        <div class="post-preview">
+            <h3>{{ post.title }}</h3>
+            <time>{{ post.date }}</time>
+            <p>{{ post.excerpt }}</p>
+            <a href="{{ post.url }}">Read more</a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "_common.html" %}
+
+{% block title %}Not Found | valgrind{% endblock %}
+
+{% block main %}
+<div class="content-wrapper">
+    <main class="main-content">
+        <article class="post-content">
+            <h1>404 Not Found</h1>
+            <p>Sorry, the page you are looking for does not exist. Take this nolang for your troubles.</p>
+            <img src="/static/img/members/nolang.png" alt="nolang">
+        </article>
+    </main>
+    
+    <aside class="blog-sidebar">
+        <h1>Recent Posts</h1>
+        <div class="post-preview-list">
+            {% for post in recent_posts %}
+            <div class="post-preview">
+                <h3>{{ post.title }}</h3>
+                <time>{{ post.date }}</time>
+                <p>{{ post.excerpt }}</p>
+                <a href="{{ post.url }}">Read more</a>
+            </div>
+            {% endfor %}
+        </div>
+    </aside>
+</div>
+{% endblock %}

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" class="holiday-css-dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}valgrind{% endblock %}</title>
+    <link rel="stylesheet" href="/static/css/holiday.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="shortcut icon" href="/static/img/flag_icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    {% block head %}{% endblock %}
+</head>
+<body>
+    {% block header %}
+    <header>
+        <img src="/static/img/logotext_inline.png" alt="valgrind logo">
+    </header>
+    {% endblock %}
+    {% block nav %}
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/posts">Posts</a></li>
+            
+        </ul>
+    </nav>
+    {% endblock %}
+    <main>
+        {% block main %}{% endblock %}
+    </main>
+    <footer>
+        <p>&copy; {{ year }} valgrind. Site made with ❤️ by N3rdL0rd. Press <kbd>`</kbd> (tilde) to enter CLI mode.</p>
+        <noscript>
+            <br>
+            <p>JavaScript is disabled. This affects nothing on the site, have a nice day!</p>
+        </noscript>
+    </footer>
+    {% block scripts %}{% endblock %}
+    <script>
+        document.addEventListener('keydown', function(e) {
+            if (e.key === '`') {
+                document.location.href = "/cli";
+            }
+        });
+    </script>
+</body>
+</html>

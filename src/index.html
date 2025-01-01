@@ -1,0 +1,143 @@
+{% extends "_common.html" %}
+
+{% block header %}
+<div class="parallax-container">
+    <div class="rellax landscape-layer" data-rellax-speed="-20">
+        <img src="/static/img/landscape/sun.png" alt="vaporwave sun">
+    </div>
+    <div class="rellax landscape-layer" data-rellax-speed="-9">
+        <img src="/static/img/landscape/1.png" alt="landscape background">
+    </div>
+    <div class="rellax landscape-layer" data-rellax-speed="-8">
+        <img src="/static/img/landscape/2.png" alt="landscape middle">
+    </div>
+    <div class="rellax landscape-layer" data-rellax-speed="-6">
+        <img src="/static/img/landscape/3.png" alt="landscape middle">
+    </div>
+    <div class="rellax landscape-layer" data-rellax-speed="-4">
+        <img src="/static/img/landscape/4.png" alt="landscape foreground">
+    </div>
+    <div class="rellax landscape-layer" data-rellax-speed="-2">
+        <img src="/static/img/landscape/5.png" id="flaglayer" alt="landscape foreground">
+    </div>
+    <div class="rellax logo-container" data-rellax-speed="-1">
+        <img src="/static/img/logotext_inline.png" alt="logo" class="logo">
+    </div>
+    <button class="scroll-button" onclick="scrollToContent()" aria-label="Scroll to content"></button>
+</div>
+{% endblock %}
+
+{% block main %}
+<div class="content-wrapper">
+    <main class="main-content">
+        <article class="post-content">
+            <h1>About Us</h1>
+            <p><a href="https://ctftime.org/team/355817">valgrind</a> was founded in September 2014 as a collaborative space for hackers of all backgrounds, skills, and ages. Operating internationally and independently of any institution, valgrind creates an environment where passionately curious individuals can learn together and grow their skills. We prioritize voluntary participation and maintaining an engaging, learning-focused atmosphere.</p>
+            <h2>Meet the Team</h2>
+            <div class="member-grid">
+                {% for member in members %}
+                    <div class="membercard">
+                        <img src="/static/img/members/{{ member.image }}" alt="{{ member.name }}" class="profile-pic">
+                        <h3>{{ member.name }}</h3>
+                        <div class="socials">
+                            {% for social in member.socials %}
+                                <a href="{{ social.url }}" class="social-link tooltip" target="_blank">
+                                    <span class="tooltiptext">{{ social.name }}</span>
+                                    <i class="{{ social.fa }}"></i>
+                                </a>
+                            {% endfor %}
+                        </div>
+                        <div class="specialties">
+                            {% for tag in member.specialties %}
+                                <span class="tag">{{ tag }}</span>
+                            {% endfor %}
+                        </div>
+                        <p class="bio">{{ member.bio }}</p>
+                        <div class="fun-facts">
+                            <h4>Fun Facts</h4>
+                            <ul>
+                                {% for fact in member.facts %}
+                                    <li>{{ fact }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </article>
+    </main>
+    
+    <aside class="blog-sidebar">
+        <h1>Recent Posts</h1>
+        <div class="post-preview-list">
+            {% for post in recent_posts %}
+            <div class="post-preview">
+                <h3>{{ post.title }}</h3>
+                <time>{{ post.date }}</time>
+                <p>{{ post.excerpt }}</p>
+                <a href="{{ post.url }}">Read more</a>
+            </div>
+            {% endfor %}
+        </div>
+    </aside>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/rellax/rellax.min.js"></script>
+<script>
+    var rellax = new Rellax('.rellax');
+
+    // const parallaxContainer = document.querySelector('.parallax-container');
+    // const layers = document.querySelectorAll('.landscape-layer');
+    
+    // const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
+    
+    // const MAX_OFFSET = 15;
+    
+    // parallaxContainer.addEventListener('mousemove', (e) => {
+    //     const centerX = window.innerWidth / 2;
+    //     const centerY = window.innerHeight / 2;
+    //     const mouseX = e.clientX - centerX;
+    //     const mouseY = e.clientY - centerY;
+
+    //     layers.forEach((layer, index) => {
+    //         const speed = (layers.length - index) * 0.02;
+    //         const offsetX = clamp(mouseX * speed, -MAX_OFFSET, MAX_OFFSET);
+    //         const offsetY = clamp(mouseY * speed, -MAX_OFFSET, MAX_OFFSET);
+            
+    //         layer.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+    //         layer.style.transition = 'transform 0.2s ease-out';
+    //     });
+    // });
+
+    // gpt gaming
+    const keys = [];
+    const nothingToSeeHere = 'NOLANG';
+    window.addEventListener('keyup', (e) => {
+        keys.push(e.key.toUpperCase());
+        keys.splice(-nothingToSeeHere.length - 1, keys.length - nothingToSeeHere.length);
+        
+        if (keys.join('') === nothingToSeeHere) {
+            document.getElementById('flaglayer').src = '/static/img/landscape/5_nolang.png';
+        }
+    });
+
+    function scrollToContent() {
+        document.querySelector('.content-wrapper').scrollIntoView({ 
+            behavior: 'smooth' 
+        });
+    }
+    
+    window.addEventListener('scroll', () => {
+        const scrollButton = document.querySelector('.scroll-button');
+        if (window.scrollY > 0) {
+            scrollButton.style.opacity = '0';
+            scrollButton.style.pointerEvents = 'none';
+        } else {
+            scrollButton.style.opacity = '1';
+            scrollButton.style.pointerEvents = 'auto';
+        }
+    });
+</script>
+{% endblock %}
