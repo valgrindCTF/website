@@ -73,7 +73,7 @@ MEMBERS = [
         name="nolang",
         specialties=["TODO"],
         image="nolang.png",
-        bio="Unofficial team mascot.",
+        bio="TODO",
         facts=["Type 'nolang' on this page and see what happens."],
         socials=[
             Social(fa="fa fa-globe", url="https://nolangilardi.github.io/", name="Website"),
