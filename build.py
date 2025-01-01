@@ -81,6 +81,18 @@ MEMBERS = [
         ]
     ),
     Member(
+        name="Pyp",
+        specialties=["crypto", "pwn", "web", "misc"],
+        image="pyp.png",
+        bio="Just a nerd with a special interest in computers.<br>Math for the day, Programming for the night.<br>The original piped Pyper in flesh.",
+        facts=["I love art, anime and the occassional music.", "I may have OCD and ADHD, the doctors have not confirmed yet ...", "Occasional CTF player, one day blood"],
+        socials=[
+            Social(fa="fa fa-globe", url="https://pyp-s-blog.web.app/", name="Website"),
+            Social(fa="fab fa-github", url="https://github.com/Pyp-3/", name="GitHub"),
+            Social(fa="fab fa-discord", url="https://discord.com/users/1190161788453519422", name="Discord"),
+        ]
+    ),
+    Member(
         name="m1t0",
         specialties=["TODO"],
         image="looking_for_logo.png",
@@ -110,16 +122,6 @@ MEMBERS = [
             Social(fa="fab fa-discord", url="https://discord.com/users/392673710563262474", name="Discord"),
         ]
     ),
-    Member(
-        name="Pyp",
-        specialties=["TODO"],
-        image="pyp.png",
-        bio="TODO",
-        facts=["TODO"],
-        socials=[
-            Social(fa="fab fa-discord", url="https://discord.com/users/1190161788453519422", name="Discord"),
-        ]
-    )
 ]
 
 @dataclass

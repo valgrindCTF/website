@@ -52,7 +52,7 @@
                                 <span class="tag">{{ tag }}</span>
                             {% endfor %}
                         </div>
-                        <p class="bio">{{ member.bio }}</p>
+                        <p class="bio">{{ member.bio|safe }}</p>
                         <div class="fun-facts">
                             <h4>Fun Facts</h4>
                             <ul>
