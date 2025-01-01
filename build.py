@@ -26,21 +26,22 @@ class Member:
 MEMBERS = [
     Member(
         name="quantum",
-        specialties=['TODO'],
+        specialties=["web", "forensics", "misc"],
         image="quantum.png",
-        bio="TODO",
-        facts=["TODO"],
+        bio="Skid wannabe hacker",
+        facts=["Insomniac", "I like bland food", "DM me if you're a girl"],
         socials=[
             Social(fa="fab fa-github", url="https://github.com/ShellUnease", name="GitHub"),
             Social(fa="fab fa-discord", url="https://discord.com/users/1193905666876768286", name="Discord"),
+            Social(fa="fa fa-globe", url="https://qv4.xyz/", name="Website"),
         ]
     ),
     Member(
         name="N3rdL0rd",
         specialties=["rev", "web", "forensics", "misc"],
         image="n3rdl0rd.png",
-        bio="ADHD-fueled maniac pretending to be sane.",
-        facts=["I made this website!", "Don't mention the Australian psychedelic rock band King Gizzard & The Lizard Wizard around me unless you want me to talk for the next hour.", "I do lockpicking as a hobby."],
+        bio="ADHD-fueled maniac pretending to be sane",
+        facts=["I made this website!", "I do lockpicking as a hobby.", "Crazy? I was crazy once. They locked me in a room."],
         socials=[
             Social(fa="fab fa-github", url="https://github.com/N3rdL0rd", name="GitHub"),
             Social(fa="fab fa-discord", url="https://discord.com/users/710879687211089992", name="Discord"),
@@ -131,6 +132,7 @@ class Post:
     excerpt: str
     url: str
     content: str
+    tags: List[str]
 
 markdowner = markdown.Markdown(output_format="html5")
 
@@ -144,7 +146,8 @@ def md_context(template):
             date=post.metadata.get('date', datetime.now().date()),
             excerpt=post.metadata.get('excerpt', ''),
             url=f"/posts/{Path(template.name).stem}",
-            content=content_html
+            content=content_html,
+            tags=post.metadata.get('tags', [])
         )
     }
 
@@ -174,11 +177,26 @@ def load_posts(posts_dir='src/posts'):
             date=post.metadata.get('date', datetime.now().date()),
             excerpt=post.metadata.get('excerpt', ''),
             url=f"/posts/{post_path.stem}/",
-            content=content
+            content=content,
+            tags=post.metadata.get('tags', [])
         ))
     return sorted(posts, key=lambda x: x.date, reverse=True)
 
 POSTS = load_posts()
+
+def generate_tag_pages(site, posts):
+    tags = {}
+    for post in posts:
+        for tag in post.tags:
+            if tag not in tags:
+                tags[tag] = []
+            tags[tag].append(post)
+    
+    for tag, tagged_posts in tags.items():
+        out = site.outpath / Path("posts/tag") / Path(tag) / Path("index.html")
+        os.makedirs(out.parent, exist_ok=True)
+        site.get_template("_tag.html").stream(tag=tag, posts=tagged_posts).dump(str(out), encoding="utf-8")
+
 ENV_GLOBALS = {
     "year": str(datetime.now().year),
     "recent_posts": POSTS[:5],
@@ -200,3 +218,4 @@ if __name__ == "__main__":
         env_globals=ENV_GLOBALS,
     )
     site.render()
+    generate_tag_pages(site, POSTS)  # Generate tag pages after rendering the site

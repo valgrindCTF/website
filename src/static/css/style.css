@@ -164,6 +164,15 @@ h1 {
     padding: 0.25rem 0.75rem;
     border-radius: 15px;
     font-size: 0.9rem;
+    transition: transform 0.2s ease;
+}
+
+.tag:hover {
+    transform: scale(1.05);
+}
+
+a.tag {
+    color: white;
 }
 
 .bio {
@@ -206,11 +215,11 @@ h1 {
 .social-link {
     color: #cb93ff !important;
     font-size: 1.5rem;
-    transition: color 0.2s ease;
+    transition: transform 0.2s ease;
 }
 
 .social-link:hover {
-    color: var(--dark-link-hover-color);
+    transform: scale(1.1);
 }
 
 .tooltip {

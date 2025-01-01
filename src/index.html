@@ -49,7 +49,7 @@
                         </div>
                         <div class="specialties">
                             {% for tag in member.specialties %}
-                                <span class="tag">{{ tag }}</span>
+                                <a class="tag" href="/posts/tag/{{ tag }}">{{ tag }}</a>
                             {% endfor %}
                         </div>
                         <p class="bio">{{ member.bio|safe }}</p>
