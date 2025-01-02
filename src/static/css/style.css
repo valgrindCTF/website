@@ -144,6 +144,7 @@ h1 {
     margin: 0 auto 1rem;
     display: block;
     border: 3px solid var(--dark-border-color);
+    object-fit: cover;
 }
 
 .membercard h3 {
