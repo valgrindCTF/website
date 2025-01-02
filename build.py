@@ -110,7 +110,7 @@ MEMBERS = [
         specialties=["crypto", "misc", "rev"],
         image="rev.webp",
         bio="Procrastinator final boss, have been using a deadline extension to play CTFs",
-        facts=[""],
+        facts=["Addicted to CTFs", "I solved a crypto challenge during a toilet break in the middle of my midterm..."],
         socials=[
             Social(fa="fab fa-discord", url="https://discord.com/users/368727891023757312", name="Discord"),
         ]
