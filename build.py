@@ -115,10 +115,10 @@ MEMBERS = [
     ),
     Member(
         name="rethinkrubiks",
-        specialties=["TODO"],
+        specialties=["crypto"],
         image="rethinkrubiks.png",
-        bio="TODO",
-        facts=["TODO"],
+        bio="Math one-trick",
+        facts=["i play osu", "idk anything fun abt myself 😹"],
         socials=[
             Social(fa="fab fa-discord", url="https://discord.com/users/392673710563262474", name="Discord"),
         ]
