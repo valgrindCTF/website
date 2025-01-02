@@ -71,9 +71,9 @@ MEMBERS = [
     ),
     Member(
         name="nolang",
-        specialties=["TODO"],
+        specialties=["rev", "pwn", "web"],
         image="nolang.png",
-        bio="TODO",
+        bio="im pretty bad at describing myself tbh",
         facts=["Type 'nolang' on this page and see what happens."],
         socials=[
             Social(fa="fa fa-globe", url="https://nolangilardi.github.io/", name="Website"),
