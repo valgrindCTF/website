@@ -3,25 +3,25 @@
 {% block header %}
 <div class="parallax-container">
     <div class="rellax landscape-layer" data-rellax-speed="-20">
-        <img src="/static/img/landscape/sun.png" alt="vaporwave sun">
+        <img src="/static/img/landscape/sun.webp" alt="vaporwave sun">
     </div>
     <div class="rellax landscape-layer" data-rellax-speed="-9">
-        <img src="/static/img/landscape/1.png" alt="landscape background">
+        <img src="/static/img/landscape/1.webp" alt="landscape background">
     </div>
     <div class="rellax landscape-layer" data-rellax-speed="-8">
-        <img src="/static/img/landscape/2.png" alt="landscape middle">
+        <img src="/static/img/landscape/2.webp" alt="landscape middle">
     </div>
     <div class="rellax landscape-layer" data-rellax-speed="-6">
-        <img src="/static/img/landscape/3.png" alt="landscape middle">
+        <img src="/static/img/landscape/3.webp" alt="landscape middle">
     </div>
     <div class="rellax landscape-layer" data-rellax-speed="-4">
-        <img src="/static/img/landscape/4.png" alt="landscape foreground">
+        <img src="/static/img/landscape/4.webp" alt="landscape foreground">
     </div>
     <div class="rellax landscape-layer" data-rellax-speed="-2">
-        <img src="/static/img/landscape/5.png" id="flaglayer" alt="landscape foreground">
+        <img src="/static/img/landscape/5.webp" id="flaglayer" alt="landscape foreground">
     </div>
     <div class="rellax logo-container" data-rellax-speed="-1">
-        <img src="/static/img/logotext_inline.png" alt="logo" class="logo">
+        <img src="/static/img/logotext_inline.webp" alt="logo" class="logo">
     </div>
     <button class="scroll-button" onclick="scrollToContent()" aria-label="Scroll to content"></button>
 </div>
@@ -119,7 +119,7 @@
         keys.splice(-nothingToSeeHere.length - 1, keys.length - nothingToSeeHere.length);
         
         if (keys.join('') === nothingToSeeHere) {
-            document.getElementById('flaglayer').src = '/static/img/landscape/5_nolang.png';
+            document.getElementById('flaglayer').src = '/static/img/landscape/5_nolang.webp';
         }
     });
 

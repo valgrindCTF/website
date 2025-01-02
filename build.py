@@ -7,6 +7,8 @@ import os
 from pathlib import Path
 from typing import List, Literal
 import shutil
+from PIL import Image
+from tqdm import tqdm
 
 @dataclass
 class Social:
@@ -27,7 +29,7 @@ MEMBERS = [
     Member(
         name="quantum",
         specialties=["web", "forensics", "misc"],
-        image="quantum.png",
+        image="quantum.webp",
         bio="Skid wannabe hacker",
         facts=["Insomniac", "I like bland food", "DM me if you're a girl"],
         socials=[
@@ -39,7 +41,7 @@ MEMBERS = [
     Member(
         name="N3rdL0rd",
         specialties=["rev", "web", "forensics", "misc"],
-        image="n3rdl0rd.png",
+        image="n3rdl0rd.webp",
         bio="ADHD-fueled maniac pretending to be sane",
         facts=["I made this website!", "I do lockpicking as a hobby.", "Crazy? I was crazy once. They locked me in a room."],
         socials=[
@@ -52,7 +54,7 @@ MEMBERS = [
     Member(
         name="acters",
         specialties=["TODO"],
-        image="acters.png",
+        image="acters.webp",
         bio="TODO",
         facts=["Likes light mode for some horrible reason."],
         socials=[
@@ -62,7 +64,7 @@ MEMBERS = [
     Member(
         name="ed",
         specialties=["TODO"],
-        image="ed.png",
+        image="ed.webp",
         bio="TODO",
         facts=["TODO"],
         socials=[
@@ -72,7 +74,7 @@ MEMBERS = [
     Member(
         name="nolang",
         specialties=["rev", "pwn", "web"],
-        image="nolang.png",
+        image="nolang.webp",
         bio="im pretty bad at describing myself tbh",
         facts=["Type 'nolang' on this page and see what happens."],
         socials=[
@@ -84,7 +86,7 @@ MEMBERS = [
     Member(
         name="Pyp",
         specialties=["crypto", "pwn", "web", "misc"],
-        image="pyp.png",
+        image="pyp.webp",
         bio="Just a nerd with a special interest in computers.<br>Math for the day, Programming for the night.<br>The original piped Pyper in flesh.",
         facts=["I love art, anime and the occasional music.", "I may have OCD and ADHD, the doctors have not confirmed yet ...", "Occasional CTF player, one day blood"],
         socials=[
@@ -96,7 +98,7 @@ MEMBERS = [
     Member(
         name="m1t0",
         specialties=["TODO"],
-        image="looking_for_logo.png",
+        image="looking_for_logo.webp",
         bio="TODO",
         facts=["TODO"],
         socials=[
@@ -106,7 +108,7 @@ MEMBERS = [
     Member(
         name="Rev",
         specialties=["TODO"],
-        image="looking_for_logo.png",
+        image="looking_for_logo.webp",
         bio="TODO",
         facts=["TODO"],
         socials=[
@@ -116,7 +118,7 @@ MEMBERS = [
     Member(
         name="rethinkrubiks",
         specialties=["crypto"],
-        image="rethinkrubiks.png",
+        image="rethinkrubiks.webp",
         bio="Math one-trick",
         facts=["i play osu", "idk anything fun abt myself 😹"],
         socials=[
@@ -204,18 +206,47 @@ ENV_GLOBALS = {
     "members": MEMBERS
 }
 
+def compress_static():
+    shutil.rmtree("build/static", ignore_errors=True)
+    os.makedirs("build/static", exist_ok=True)
+    
+    source_path = Path("src/static")
+    png_files = list(source_path.rglob("*.png"))
+    
+    for png_file in tqdm(png_files, desc="Converting images"):
+        try:
+            rel_path = png_file.relative_to(source_path)
+            out_path = Path("build/static") / rel_path.parent
+            out_path.mkdir(parents=True, exist_ok=True)
+            image = Image.open(png_file)
+            webp_path = (out_path / rel_path.stem).with_suffix('.webp')
+            image.save(webp_path, 'WEBP', quality=80)
+        except Exception as e:
+            print(f"Error converting {png_file}: {e}")
+    
+    for item in source_path.rglob('*'):
+        if item.is_file() and item.suffix.lower() != '.png':
+            rel_path = item.relative_to(source_path)
+            dest_path = Path("build/static") / rel_path
+            dest_path.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(item, dest_path)
+
+def skip_render(*args, **kwargs):
+    pass
+
 if __name__ == "__main__":
     shutil.rmtree("build", ignore_errors=True)
     site = Site.make_site(
         searchpath="src",
         outpath="build",
-        staticpaths=['static'],
+        staticpaths=["static"],
         contexts=[(r".*\.md", md_context)],
         rules=[
             (r".*\.md", render_md),
-            (r".*\.html", render_html)  # Add rule for HTML files
+            (r".*\.html", render_html),            
         ],
         env_globals=ENV_GLOBALS,
     )
     site.render()
     generate_tag_pages(site, POSTS)  # Generate tag pages after rendering the site
+    compress_static()

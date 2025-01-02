@@ -1,3 +1,5 @@
 staticjinja
 python-frontmatter
 markdown
+pillow
+tqdm

@@ -12,6 +12,4 @@ install:
 
 # Host the site locally
 serve:
-    python -m webbrowser http://localhost:8000
-    cd build
-    python -m http.server
+    cd build && python -m webbrowser http://localhost:8000 && python -m http.server
