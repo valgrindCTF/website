@@ -107,10 +107,10 @@ MEMBERS = [
     ),
     Member(
         name="Rev",
-        specialties=["TODO"],
-        image="looking_for_logo.webp",
-        bio="TODO",
-        facts=["TODO"],
+        specialties=["crypto", "misc", "rev"],
+        image="rev.webp",
+        bio="Procrastinator final boss, have been using a deadline extension to play CTFs",
+        facts=[""],
         socials=[
             Social(fa="fab fa-discord", url="https://discord.com/users/368727891023757312", name="Discord"),
         ]
