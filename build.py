@@ -63,10 +63,10 @@ MEMBERS = [
     ),
     Member(
         name="ed",
-        specialties=["TODO"],
+        specialties=["pwn", "rev"],
         image="ed.webp",
-        bio="TODO",
-        facts=["TODO"],
+        bio="evolved to kagura",
+        facts=["Saying thanks to gpt wastes 0.003 kWh"],
         socials=[
             Social(fa="fab fa-discord", url="https://discord.com/users/881495305638535209", name="Discord"),
         ]
