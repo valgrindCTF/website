@@ -53,9 +53,9 @@ MEMBERS = [
     ),
     Member(
         name="acters",
-        specialties=["TODO"],
+        specialties=["osint"],
         image="acters.webp",
-        bio="TODO",
+        bio="that spicy bell pepper lol",
         facts=["Likes light mode for some horrible reason."],
         socials=[
             Social(fa="fab fa-discord", url="https://discord.com/users/156840430099496960", name="Discord"),
