@@ -4,6 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}valgrind{% endblock %}</title>
+    <meta name="title" content="valgrind" />
+    <meta name="description" content="{{ meta_desc }}" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="{{ meta_url }}" />
+    <meta property="og:title" content="{{ meta_title }}" />
+    <meta property="og:description" content="{{ meta_desc }}" />
+
+    <!-- Twitter -->
+    <meta property="twitter:url" content="{{ meta_url }}" />
+    <meta property="twitter:title" content="{{ meta_title }}" />
+    <meta property="twitter:description" content="{{ meta_desc }}" />
+
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
     <link rel="stylesheet" href="/static/css/holiday.css">
     <link rel="stylesheet" href="/static/css/style.css">
