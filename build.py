@@ -128,7 +128,7 @@ MEMBERS = [
     Member(
         name="gtronous",
         specialties=["forensics", "misc", "osint"],
-        image="gtronous.webp",
+        image="megatron.webp",
         bio="CTFs addict and Malware Analysis enthusiast",
         facts=["i like to tease ed & nolang", "i might swear at cheaters"],
         socials=[
