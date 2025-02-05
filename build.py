@@ -125,6 +125,17 @@ MEMBERS = [
             Social(fa="fab fa-discord", url="https://discord.com/users/392673710563262474", name="Discord"),
         ]
     ),
+    Member(
+        name="gtronous",
+        specialties=["forensics", "misc", "osint"],
+        image="gtronous.webp",
+        bio="CTFs addict and Malware Analysis enthusiast",
+        facts=["i like to tease ed & nolang", "i might swear at cheaters"],
+        socials=[
+            Social(fa="fa fa-globe", url="https://gtronous.github.io/", name="Website"),
+            Social(fa="fab fa-github", url="https://github.com/gtronous", name="GitHub"),
+        ]
+    ),
 ]
 
 @dataclass
