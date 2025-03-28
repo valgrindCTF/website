@@ -69,8 +69,11 @@ h1 {
 .logo-container {
     position: absolute;
     bottom: 6vh;
-    left: 10vh;
-    z-index: 1000;
+    left: 8vh;
+    transform: translateX(-50%);
+    margin: 0; /* Remove auto margin */
+    width: auto; /* Adjust width dynamically */
+    height: auto; /* Maintain aspect ratio */
 }
 
 .logo {
@@ -81,7 +84,6 @@ h1 {
 .content-wrapper {
     display: grid;
     grid-template-columns: 1fr 300px;
-    gap: 2rem;
     max-width: var(--max-body-width);
     margin: 0 auto;
     padding: 2rem;
@@ -304,6 +306,55 @@ a.tag {
     }
     60% {
         transform: translateX(-50%) translateY(-5px);
+    }
+}
+
+@media (max-width: 768px) {
+    .content-wrapper {
+        display: flex;
+        flex-direction: column;
+        padding: 1rem; /* Consistent padding for alignment */
+    }
+
+    .blog-sidebar {
+        order: 1;
+        padding: 1rem; /* Match padding with content-wrapper */
+    }
+
+    .main-content {
+        order: 2;
+        padding: 1rem; /* Match padding with content-wrapper */
+    }
+
+    .member-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .logo-container {
+        position: absolute;
+        left: 1vh;;
+    }
+
+    .landscape-elements {
+        width: 100%; /* Adjust width for mobile */
+        height: auto; /* Maintain aspect ratio */
+        max-width: 90%; /* Add padding from screen edges */
+        margin: 0 auto; /* Center elements */
+    }
+
+    .scroll-button {
+        bottom: 2vh;
+    }
+
+    .landscape-layer img {
+        position: absolute;
+        top: auto; /* Remove centering */
+        bottom: 0; /* Align to the bottom */
+        left: 50%;
+        transform: translateX(-50%); /* Adjust horizontal alignment only */
+        width: 100%;
+        height: 60%;
+        object-fit: cover;
     }
 }
 
