@@ -60,20 +60,29 @@
             }
         }
         
+        let introComplete = false; // Flag to track if intro is complete
+
         // Initial sequence
         async function playIntro() {
             term.write('$ ');
             await sleep(500);
+            term.write('\x1b[38;5;213m'); // Set pink color
             await typeText('nc valgrindc.tf 1337');
+            term.write('\x1b[0m'); // Reset color
+            await sleep(500);
+            term.writeln('');
+            await typeText('Welcome to the Valgrind CLI! Type "help" to see available commands.');
             await sleep(200);
             term.writeln('');
-            term.write('valgrind@web:~$ ');
+            term.write(generatePrompt(cwd));
+            introComplete = true; // Mark intro as complete
         }
         
         playIntro();
         
         function generatePrompt(cwd) {
-            return `valgrind@web:${cwd}$ `;
+            const displayPath = cwd === '/home/valgrind' ? '~' : cwd; // Replace /home/valgrind with ~
+            return `\x1b[38;5;213mvalgrind@web:${displayPath}$ \x1b[0m`; // Pink prompt
         }
 
         var fs = {
@@ -84,11 +93,9 @@
                         type: 'dir',
                         contents: {
                             'ls': { type: 'file', executable: true },
-                            'cd': { type: 'file', executable: true },
-                            'pwd': { type: 'file', executable: true },
                             'cat': { type: 'file', executable: true },
-                            'echo': { type: 'file', executable: true },
-                            'help': { type: 'file', executable: true }
+                            'help': { type: 'file', executable: true },
+                            'flag': { type: 'file', executable: true }
                         }
                     },
                     'home': {
@@ -97,7 +104,14 @@
                             'valgrind': {
                                 type: 'dir',
                                 contents: {
-                                    'README': { type: 'file', content: 'This CLI is under construction... check back later!' }
+                                    'flag.txt': { type: 'file', content: 'val{welcome_to_valgrind}' },
+                                    '.hidden_flag.txt': { type: 'file', content: 'val{hidden_in_plain_sight}' }, // Hidden file
+                                    'challenge': {
+                                        type: 'dir',
+                                        contents: {
+                                            'hint.txt': { type: 'file', content: 'The flag is hidden in plain sight. Look carefully!' }
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -109,15 +123,29 @@
         const commands = {
             ls: (args) => {
                 // List directory contents
-                let path = args[0] || cwd;
+                let path = args.find(arg => !arg.startsWith('-')) || cwd;
                 let dir = resolvePathToObject(path);
                 if (!dir || dir.type !== 'dir') return 'ls: not a directory';
-                return Object.keys(dir.contents).join('  ');
+
+                const showAll = args.includes('-a'); // Check for the -a flag
+                const contents = Object.keys(dir.contents).filter(item => {
+                    // Hide files starting with '.' unless -a is specified
+                    return showAll || !item.startsWith('.');
+                });
+
+                return contents.join('  ');
             },
             cd: (args) => {
                 // Change directory
                 if (!args[0]) {
-                    cwd = '/home/valgrind';
+                    cwd = '~'; // Reset to home
+                    return '';
+                }
+                if (args[0] === '..') {
+                    if (cwd === '~') {
+                        return ''; // Already at root
+                    }
+                    cwd = cwd === '/home/valgrind' ? '~' : '/home/valgrind'; // Resolve to ~ if at /home/valgrind
                     return '';
                 }
                 let newPath = resolvePath(args[0]);
@@ -143,7 +171,16 @@
             },
             help: () => {
                 // Show available commands
-                return 'Available commands: ' + Object.keys(commands).join(', ');
+                return 'Available commands: ls [-a], cat, help, flag';
+            },
+            flag: () => {
+                // Display a fun message
+                return 'Flags are hidden in the file system. Use your skills to find them!';
+            },
+            exit: () => {
+                // Redirect to the parent location
+                window.location.href = "..";
+                return ''; // No output needed
             }
         };
         
@@ -179,7 +216,8 @@
         
         function resolvePath(path) {
             if (path.startsWith('/')) return path;
-            return cwd + '/' + path;
+            const resolved = cwd === '~' ? '/home/valgrind' : cwd;
+            return resolved + '/' + path;
         }
 
         var cwd = '~';
@@ -193,25 +231,28 @@
             };
         }
 
+        let commandHistory = [];
+        let historyIndex = -1;
+
         function executeCommand(input) {
             if (!input.trim()) return '';
-            
-            const {cmd, args} = parseCommand(input);
+
+            // Save command to history
+            commandHistory.push(input);
+            historyIndex = commandHistory.length; // Reset history index
+
+            const { cmd, args } = parseCommand(input);
             if (!commands[cmd]) {
                 return `${cmd}: command not found`;
             }
-            return commands[cmd](args);
-        }
 
-        function resolvePath(path) {
-            if (!path) return cwd;
-            path = path.replace(/^~/, '/home/valgrind');
-            if (path.startsWith('/')) return path;
-            return (cwd === '~' ? '/home/valgrind' : cwd) + '/' + path;
+            return commands[cmd](args);
         }
 
         // Update the onKey handler
         term.onKey(e => {
+            if (!introComplete) return; // Ignore input until intro is complete
+
             const printable = !e.domEvent.altKey && !e.domEvent.altGraphKey && 
                             !e.domEvent.ctrlKey && !e.domEvent.metaKey;
 
@@ -219,7 +260,7 @@
                 term.writeln('');
                 const output = executeCommand(buffer);
                 if (output) {
-                    term.writeln(output);
+                    term.writeln(`\x1b[37m${output}\x1b[0m`); // Output in white
                 }
                 term.write(generatePrompt(cwd));
                 buffer = '';
@@ -228,6 +269,25 @@
                     term.write('\b \b');
                     buffer = buffer.slice(0, -1);
                 }
+            } else if (e.domEvent.keyCode === 38) { // Up arrow
+                if (historyIndex > 0) {
+                    historyIndex--;
+                    buffer = commandHistory[historyIndex];
+                    term.write(`\r${generatePrompt(cwd)}${buffer}`); // Replace current input
+                }
+            } else if (e.domEvent.keyCode === 40) { // Down arrow
+                if (historyIndex < commandHistory.length - 1) {
+                    historyIndex++;
+                    buffer = commandHistory[historyIndex];
+                    term.write(`\r${generatePrompt(cwd)}${buffer}`); // Replace current input
+                } else {
+                    historyIndex = commandHistory.length;
+                    buffer = '';
+                    term.write(`\r${generatePrompt(cwd)}`); // Clear input
+                }
+            } else if (e.domEvent.keyCode === 37 || e.domEvent.keyCode === 39) { // Left/Right arrow
+                // Restrict left/right arrow movements
+                e.domEvent.preventDefault();
             } else if (printable) {
                 term.write(e.key);
                 buffer += e.key;
