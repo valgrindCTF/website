@@ -11,13 +11,13 @@ from PIL import Image
 from tqdm import tqdm
 
 @dataclass
-class Social
+class Social:
     fa: str
     url: str
     name: str
 
 @dataclass
-class Member
+class Member:
     name: str
     specialties: List[Literal['rev', 'misc', 'web', 'crypto', 'pwn', 'forensics', 'reversing', 'hardware', 'networking', 'osint', 'stego', 'trivia', 'programming', 'TODO']]
     image: str
