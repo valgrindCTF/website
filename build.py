@@ -11,13 +11,13 @@ from PIL import Image
 from tqdm import tqdm
 
 @dataclass
-class Social:
+class Social
     fa: str
     url: str
     name: str
 
 @dataclass
-class Member:
+class Member
     name: str
     specialties: List[Literal['rev', 'misc', 'web', 'crypto', 'pwn', 'forensics', 'reversing', 'hardware', 'networking', 'osint', 'stego', 'trivia', 'programming', 'TODO']]
     image: str
@@ -97,12 +97,12 @@ MEMBERS = [
     ),
     Member(
         name="m1t0",
-        specialties=["TODO"],
-        image="looking_for_logo.webp",
-        bio="TODO",
-        facts=["TODO"],
+        specialties=["pwn", "pwn", "pwn"],
+        image="m1t0.webp",
+        bio="Professional pwner",
+        facts=["Doesn't respond to DMs", "Busy with life"],
         socials=[
-            Social(fa="fab fa-discord", url="https://discord.com/users/797313664084082728", name="Discord"),
+            Social(fa="fab fa-discord", url="https://discord.com/users/797313664084082728", name="Discord")
         ]
     ),
     Member(
