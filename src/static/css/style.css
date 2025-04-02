@@ -29,7 +29,6 @@ h1 {
 }
 
 .parallax-container {
-    height: 100vh;
     width: 100vw;
     margin-left: calc(-50vw);
     left: 50%;
@@ -353,8 +352,8 @@ a.tag {
         left: 50%;
         transform: translateX(-50%); /* Adjust horizontal alignment only */
         width: 100%;
-        height: 60%;
+        /* Adjust height based on viewport and top safe area, aligned to bottom */
+        height: calc(60vh - env(safe-area-inset-top, 0px)); 
         object-fit: cover;
     }
 }
-

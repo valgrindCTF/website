@@ -142,5 +142,21 @@
             scrollButton.style.pointerEvents = 'auto';
         }
     });
+
+    // Dynamically set parallax container height based on window inner height
+    const parallaxContainer = document.querySelector('.parallax-container');
+    function setParallaxHeight() {
+        if (parallaxContainer) {
+            parallaxContainer.style.height = `${window.innerHeight}px`;
+        }
+    }
+
+    // Set height on initial load
+    setParallaxHeight();
+
+    // Update height on resize and orientation change
+    window.addEventListener('resize', setParallaxHeight);
+    window.addEventListener('orientationchange', setParallaxHeight);
+
 </script>
 {% endblock %}
