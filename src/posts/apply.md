@@ -41,7 +41,7 @@ Since we're an international team, we don't want to discriminate based on knowle
     <textarea name="why" id="why" placeholder="I want to join valgrind because... (they place well in competitions, I like their logo, Tx told me to, etc.)" required></textarea>
     <label for="where">Where are you located in the world? What's your timezone? What's your primary language, and how well do you know English?</label>
     <textarea name="where" id="where" placeholder="I'm in Antarctica, my timezone is CST, my primary language is English and I've spoken it since birth." required></textarea>
-    <label for="accept">I accept that this information will be shared internally in valrind. I understand that by submitting this information I am committing to applying to valgrind and I am prepared to continue an application process in the future.</label><input type="checkbox" id="accept" name="accept" value="accept">
+    <label for="accept">I accept that this information will be shared internally in valgrind. I understand that by submitting this information I am committing to applying to valgrind and I am prepared to continue an application process in the future.</label><input type="checkbox" id="accept" name="accept" value="accept">
     <br><br>
     <button type="submit">Submit Application</button>
 </form>
