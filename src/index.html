@@ -4,6 +4,20 @@
 {% extends "_common.html" %}
 
 {% block header %}
+<div id="page-loader" class="loader-overlay">
+    <div class="loader-content">
+        <div class="loader-spinner"></div>
+    </div>
+</div>
+
+<noscript>
+    <style>
+        #page-loader {
+            display: none !important;
+        }
+    </style>
+</noscript>
+
 <div class="parallax-container">
     <div class="rellax landscape-layer" data-rellax-speed="-20">
         <img src="/static/img/landscape/sun.webp" class="landscape-sun" alt="vaporwave sun">
@@ -89,6 +103,44 @@
 {% block scripts %}
 <script src="/static/rellax/rellax.min.js"></script>
 <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const loader = document.getElementById('page-loader');
+        const allImages = document.querySelectorAll('img');
+        let imagesLoaded = 0;
+        
+        function hideLoader() {
+            setTimeout(() => {
+                loader.style.opacity = '0';
+                setTimeout(() => {
+                    loader.style.display = 'none';
+                }, 500);
+            }, 100);
+        }
+        
+        function imageLoaded() {
+            imagesLoaded++;
+            if (imagesLoaded === allImages.length) {
+                hideLoader();
+            }
+        }
+        
+        if (allImages.length === 0) {
+            hideLoader();
+        } else {
+            allImages.forEach(img => {
+                if (img.complete) {
+                    imageLoaded();
+                } else {
+                    img.addEventListener('load', imageLoaded);
+                    img.addEventListener('error', imageLoaded);
+                }
+            });
+            
+            // fallback in case some images never load
+            setTimeout(hideLoader, 5000);
+        }
+    });
+
     var rellax = new Rellax('.rellax');
 
     // gpt gaming

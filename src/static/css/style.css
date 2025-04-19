@@ -248,17 +248,17 @@ a.tag {
 
 .scroll-button {
     position: fixed;
-    bottom: 4vh;
+    bottom: 2.5vh;
     left: 50%;
     transform: translateX(-50%);
     background: rgba(255, 255, 255, 0.9);
     border: none;
     border-radius: 50%;
-    width: calc(20px + 1.5vw);
-    height: calc(20px + 1.5vw);
+    width: clamp(2.5rem, 1.5vw + 2rem, 4rem);
+    height: clamp(2.5rem, 1.5vw + 2rem, 4rem);
     cursor: pointer;
     z-index: 9999;
-    box-shadow: 0 calc(1px + 0.1vw) calc(4px + 0.3vw) rgba(0, 0, 0, 0.2);
+    box-shadow: 0 clamp(0.1rem, 0.1vw + 0.05rem, 0.2rem) clamp(0.25rem, 0.3vw + 0.15rem, 0.5rem) rgba(0, 0, 0, 0.2);
     animation: bounce 2s infinite;
     transition: opacity 0.3s, background 0.3s;
 }
@@ -270,12 +270,12 @@ a.tag {
 .scroll-button::after {
     content: '';
     display: inline-block;
-    width: calc(5px + 0.4vw);
-    height: calc(5px + 0.4vw);
-    border-right: calc(1px + 0.1vw) solid #000;
-    border-bottom: calc(1px + 0.1vw) solid #000;
+    width: clamp(0.5rem, 0.4vw + 0.3rem, 1rem);
+    height: clamp(0.5rem, 0.4vw + 0.3rem, 1rem);
+    border-right: clamp(0.1rem, 0.1vw + 0.05rem, 0.15rem) solid #000;
+    border-bottom: clamp(0.1rem, 0.1vw + 0.05rem, 0.15rem) solid #000;
     transform: rotate(45deg);
-    margin-top: calc(-2px - 0.1vw);
+    margin-top: clamp(-0.3rem, -0.1vw - 0.15rem, -0.1rem);
 }
 
 @keyframes bounce {
@@ -338,4 +338,44 @@ a.tag {
         height: calc(60vh - env(safe-area-inset-top, 0px)); 
         object-fit: cover;
     }
+}
+
+.loader-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #13051c;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease;
+}
+
+.loader-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.loader-logo {
+    max-width: 200px;
+    opacity: 0.8;
+}
+
+.loader-spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top: 4px solid #e794ff;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
