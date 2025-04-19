@@ -91,29 +91,6 @@
 <script>
     var rellax = new Rellax('.rellax');
 
-    // const parallaxContainer = document.querySelector('.parallax-container');
-    // const layers = document.querySelectorAll('.landscape-layer');
-    
-    // const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
-    
-    // const MAX_OFFSET = 15;
-    
-    // parallaxContainer.addEventListener('mousemove', (e) => {
-    //     const centerX = window.innerWidth / 2;
-    //     const centerY = window.innerHeight / 2;
-    //     const mouseX = e.clientX - centerX;
-    //     const mouseY = e.clientY - centerY;
-
-    //     layers.forEach((layer, index) => {
-    //         const speed = (layers.length - index) * 0.02;
-    //         const offsetX = clamp(mouseX * speed, -MAX_OFFSET, MAX_OFFSET);
-    //         const offsetY = clamp(mouseY * speed, -MAX_OFFSET, MAX_OFFSET);
-            
-    //         layer.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
-    //         layer.style.transition = 'transform 0.2s ease-out';
-    //     });
-    // });
-
     // gpt gaming
     const keys = [];
     const nothingToSeeHere = 'NOLANG';
@@ -143,7 +120,6 @@
         }
     });
 
-    // Dynamically set parallax container height based on window inner height
     const parallaxContainer = document.querySelector('.parallax-container');
     function setParallaxHeight() {
         if (parallaxContainer) {
@@ -151,10 +127,8 @@
         }
     }
 
-    // Set height on initial load
     setParallaxHeight();
 
-    // Update height on resize and orientation change
     window.addEventListener('resize', setParallaxHeight);
     window.addEventListener('orientationchange', setParallaxHeight);
 
