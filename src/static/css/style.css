@@ -9,13 +9,12 @@ h1 {
     margin-left: calc(-50vw);
     left: 50%;
     position: relative;
-    overflow-x: hidden;
+    overflow-x: visible;
     overflow-y: hidden;
     perspective: 2px;
     background-color: var(--landscape-background);
 }
 
-/* Ensure parent container allows overflow */
 .parent-container {
     overflow-x: visible;
     position: relative;
@@ -39,6 +38,13 @@ h1 {
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+.landscape-layer img.landscape-sun {
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+    top: 35%;
 }
 
 .logo-container {
