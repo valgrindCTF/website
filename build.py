@@ -9,6 +9,8 @@ from typing import List, Literal
 import shutil
 from PIL import Image
 from tqdm import tqdm
+import argparse
+import hashlib
 
 @dataclass
 class Social:
@@ -221,6 +223,9 @@ def compress_static():
     shutil.rmtree("build/static", ignore_errors=True)
     os.makedirs("build/static", exist_ok=True)
     
+    cache_dir = Path(".img_cache")
+    cache_dir.mkdir(exist_ok=True)
+    
     source_path = Path("src/static")
     png_files = list(source_path.rglob("*.png"))
     
@@ -229,9 +234,20 @@ def compress_static():
             rel_path = png_file.relative_to(source_path)
             out_path = Path("build/static") / rel_path.parent
             out_path.mkdir(parents=True, exist_ok=True)
-            image = Image.open(png_file)
+            
+            with open(png_file, 'rb') as f:
+                file_hash = hashlib.md5(f.read()).hexdigest()
+            
+            cache_path = cache_dir / f"{file_hash}.webp"
             webp_path = (out_path / rel_path.stem).with_suffix('.webp')
-            image.save(webp_path, 'WEBP', quality=80)
+            
+            if cache_path.exists():
+                shutil.copy2(cache_path, webp_path)
+            else:
+                image = Image.open(png_file)
+                image.save(webp_path, 'WEBP', quality=80)
+                shutil.copy2(webp_path, cache_path)
+                
         except Exception as e:
             print(f"Error converting {png_file}: {e}")
     
@@ -246,6 +262,10 @@ def skip_render(*args, **kwargs):
     pass
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Build the static site.")
+    parser.add_argument("--no-compress", action="store_true", help="Skip image compression")
+    args = parser.parse_args()
+    
     shutil.rmtree("build", ignore_errors=True)
     site = Site.make_site(
         searchpath="src",
@@ -259,5 +279,6 @@ if __name__ == "__main__":
         env_globals=ENV_GLOBALS,
     )
     site.render()
-    generate_tag_pages(site, POSTS)  # Generate tag pages after rendering the site
-    compress_static()
+    generate_tag_pages(site, POSTS)
+    if not args.no_compress:
+        compress_static()
