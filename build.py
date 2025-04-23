@@ -99,12 +99,13 @@ MEMBERS = [
     ),
     Member(
         name="m1t0",
-        specialties=["pwn", "pwn", "pwn"],
+        specialties=["pwn", "rev"],
         image="m1t0.webp",
-        bio="Professional pwner",
-        facts=["Doesn't respond to DMs", "Busy with life"],
+        bio="Former Security Engineer.<br>Eternal CTF beginner.",
+        facts=["I've recently listed some items on Mercari", "My YouTube subscriber count recently reached 321. My immediate goal is to reach 1,000"],
         socials=[
-            Social(fa="fab fa-discord", url="https://discord.com/users/797313664084082728", name="Discord")
+            Social(fa="fab fa-discord", url="https://discord.com/users/797313664084082728", name="Discord"),
+            Social(fa="fab fa-github", url="https://github.com/mito753", name="GitHub")
         ]
     ),
     Member(
