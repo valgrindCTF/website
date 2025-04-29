@@ -29,11 +29,11 @@ class Member:
 
 MEMBERS = [
     Member(
-        name="quantum",
+        name="VXXDXX",
         specialties=["web", "forensics", "misc"],
         image="quantum.webp",
         bio="Skid wannabe hacker",
-        facts=["Insomniac", "I like bland food", "Dark mode only"],
+        facts=["Insomniac", "It's pronounced \"Voodoo\"", "Dark mode only"],
         socials=[
             Social(fa="fab fa-github", url="https://github.com/ShellUnease", name="GitHub"),
             Social(fa="fab fa-discord", url="https://discord.com/users/1193905666876768286", name="Discord"),
