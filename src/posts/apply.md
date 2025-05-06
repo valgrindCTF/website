@@ -1,7 +1,7 @@
 ---
-title: "How to Apply to valgrind"
+title: "Apply to join valgrind"
 date: "2025-04-09"
-excerpt: "Want to join valgrind? Start here."
+excerpt: "Want to join us? Start here."
 tags: []
 ---
 
@@ -10,6 +10,8 @@ At valgrind, we pride ourselves in being thorough with applications and selectio
 > Please don't email/DM random members of valgrind regarding applications or joining the team. Pretty please.
 
 Since we're an international team, we don't want to discriminate based on knowledge of English. However, use of ChatGPT to improve the quality of your application significantly lessens the chance that you are accepted, as any use of LLMs can be constituted as not filling out this form yourself - and we want to hear from *you*, not AI.
+
+If your application is selected, we will follow up with you in a DM to the Discord username you provide. You may be asked to solve a few simple sanity check challenges in your specialty categories, and you may also be subject to a 1-3 week trial period before your application is finalized as either an acceptance or a rejection.
 
 <form action="https://formspree.io/f/xvgkdzbq" method="post">
     <label for="name">Name:</label>
@@ -46,4 +48,4 @@ Since we're an international team, we don't want to discriminate based on knowle
     <button type="submit">Submit Application</button>
 </form>
 
-FYI: If you aren't accepted, there will be no message or communication effort made to let you know you've been rejected. Sorry!
+FYI: If you aren't accepted after your initial application, there will be no message or communication effort made to let you know you've been rejected. Sorry!
