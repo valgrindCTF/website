@@ -143,12 +143,12 @@ MEMBERS = [
         name="Ap4sh",
         specialties=["crypto", "misc", "web", "forensics"],
         image="ap4sh.webp",
-        bio="gpt gaming",
-        facts=["my search history would worry a normal person", "sometimes i hibernate for a month without touching a shell and just play League of Legends"],
+        bio="ADHD brain powered by music",
+        facts=["my search history would worry a normal person"],
         socials=[
             Social(fa="fa fa-globe", url="https://ap4sh.guru/", name="Website"),
             Social(fa="fab fa-discord", url="https://discord.com/users/1032261229626003537", name="Discord Ap4sh"),
-            Social(fa="fab fa-discord", url="https://discord.com/ssers/i193168699365019679", name="Discord Bak"),
+            Social(fa="fab fa-discord", url="https://discord.com/users/193168699365019679", name="Discord Bak"),
         ]
     ),
 ]
