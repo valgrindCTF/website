@@ -12,7 +12,8 @@
     --dark-success-hover-color: #6e2a8f;
     --dark-danger-text-background-color: #770018;
     --dark-success-text-background-color: #af5bc8;
-    --dark-code-text-color: #f1a0b0;
+    --dark-code-text-color: #fff;
+    --code-text-color: #fff !important;
     --dark-code-background-color: #292b2e;
     --dark-link-color: #fb4e9b;
     --dark-link-visited-color: #fb4e9b;

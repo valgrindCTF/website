@@ -1,5 +1,8 @@
 staticjinja
 python-frontmatter
 markdown
+pygments
 pillow
 tqdm
+python-markdown-math
+catppuccin[pygments]
