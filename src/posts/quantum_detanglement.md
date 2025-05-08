@@ -1,5 +1,5 @@
 ---
-title: "Crypto hard - Quantum Detanglement – UVT CTF 2025"
+title: "Crypto - Quantum Detanglement – UVT CTF 2025"
 date: "2025-05-08"
 excerpt: "Writeup of the hardest crypto challenge Quantum Detanglement from UVT CTF 2025"
 tags: ["crypto", "quantum"]
@@ -7,6 +7,7 @@ tags: ["crypto", "quantum"]
 
 ## Overview
 
+Quantum Detanglement was the challenge with the fewest solves in the cryptography category at the UVT CTF 2025.
 Alice and Bob share a zero-noise quantum link and repeatedly prepare Bell pairs. Bob encodes a secret message by applying Pauli operators to his half of each pair (super-dense coding), and the server prints the resulting 2-qubit state vectors without collapsing them. Our goal is to reconstruct Bob’s classical message—the flag—by analyzing the printed stream of state vectors.
 
 ## 1. Challenge Description
