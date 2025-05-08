@@ -1,7 +1,7 @@
 ---
-title: "Crypto - Quantum Detanglement – UVT CTF 2025"
+title: "Crypto hard - Quantum Detanglement – UVT CTF 2025"
 date: "2025-05-08"
-excerpt: "Writeup of the crypto challenge Quantum Detanglement from UVT CTF 2025"
+excerpt: "Writeup of the hardest crypto challenge Quantum Detanglement from UVT CTF 2025"
 tags: ["crypto", "quantum"]
 ---
 
@@ -12,7 +12,9 @@ Alice and Bob share a zero-noise quantum link and repeatedly prepare Bell pairs.
 ## 1. Challenge Description
 
 - The server prints hundreds of lines, each like:
-    Initial state = `Matrix([[sqrt(2)/2], [0], [0], [-sqrt(2)/2]])`
+    Initial state =
+
+    `Matrix([[sqrt(2)/2], [0], [0], [-sqrt(2)/2]])`
   
     `Matrix([[0], [-sqrt(2)/2], [sqrt(2)/2], [0]])`
   
@@ -61,7 +63,7 @@ Alice prints the Bell state **after** Bob’s operation, allowing us to deduce w
 
 ## 4. Key Idea: Transitions
 
-Instead of mapping each state directly to two bits (which would require guessing one of 24 possible label→bits maps), we look at **pairs** of successive Bell labels:
+Instead of mapping each state directly to two bits (which would require guessing one of 24 possible label $\rightarrow$ bits maps), we look at **pairs** of successive Bell labels:
 
 $$
 \beta_{\text{prev}}\xrightarrow{P}\ \beta_{\text{cur}}
@@ -71,7 +73,7 @@ For each $(\beta_{\text{prev}},\beta_{\text{cur}})$ there is exactly one $P\in{I
 
 Transition table:
 
-|prev $\downarrow$ cur →|$\Phi^+$|$\Psi^+$|$\Phi^-$|$\Psi^-$|
+|prev $\downarrow$ cur $\rightarrow$ |$\Phi^+$|$\Psi^+$|$\Phi^-$|$\Psi^-$|
 |---|---|---|---|---|
 |**$\Phi^+$**|I|X|Z|Y|
 |**$\Psi^+$**|X|I|Y|Z|
@@ -90,7 +92,7 @@ Concatenate all 2-bit chunks in order.
 
 1. **Download** the entire server output (a few KB).
 2. **Parse** each line with a regex to extract four entries $a_0,a_1,a_2,a_3$.  
-    Convert `$[sqrt(2)/2]` → $+1$, `-sqrt(2)/2` → $-1$, `[0]` → $0$.
+    Convert `$[sqrt(2)/2]` $\rightarrow$ $+1$, `-sqrt(2)/2` $\rightarrow$ $-1$, `[0]` $\rightarrow$ $0$.
 
 3. **Classify** vector $v=[a_0,a_1,a_2,a_3]$:
     - If indices ${0,3}$ are non-zero ⇒ $\Phi$, else ${1,2}$ ⇒ $\Psi$.
@@ -166,9 +168,10 @@ print(text)
 ## 7. Why It Works
 
 - **Global phase** ignored: ±1 doesn’t change Bell type.
-- **Transitions** give the Pauli operator directly, no brute-force over label → bits.
+- **Transitions** give the Pauli operator directly, no brute-force over label $\rightarrow$ bits.
 - Standard **super-dense coding** mapping recovers the original 2-bit message sequence.
 
 This method is robust to duplicate lines (removing duplicates optional) and prints, in order, exactly the bits Bob intended to send.
 
 Much love 💋
+Ap4sh
