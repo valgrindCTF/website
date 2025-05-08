@@ -7,7 +7,6 @@ tags: ["crypto", "quantum"]
 
 ## Overview
 
-Quantum Detanglement was the challenge with the fewest solves in the cryptography category at the UVT CTF 2025.
 Alice and Bob share a zero-noise quantum link and repeatedly prepare Bell pairs. Bob encodes a secret message by applying Pauli operators to his half of each pair (super-dense coding), and the server prints the resulting 2-qubit state vectors without collapsing them. Our goal is to reconstruct Bob’s classical message—the flag—by analyzing the printed stream of state vectors.
 
 ## 1. Challenge Description
@@ -27,7 +26,9 @@ $$
 \ket\psi = a_0\ket{00} + a_1\ket{01} + a_2\ket{10} + a_3\ket{11}\
 $$
 
+
 ---
+
 
 ## 2. Bell States
 
@@ -47,7 +48,9 @@ $$
 
 is physically the same as $\Phi^+$. Thus the server’s "eight" variants collapse to four canonical labels.
 
+
 ---
+
 
 ## 3. Super-Dense Coding
 
@@ -61,6 +64,10 @@ Bob encodes two classical bits $(b_1,b_0)$ by applying a Pauli operator $P$ on h
 |(1,1)|$Y$|$\Psi^-$|
 
 Alice prints the Bell state **after** Bob’s operation, allowing us to deduce which $P$ was applied.
+
+
+---
+
 
 ## 4. Key Idea: Transitions
 
@@ -89,6 +96,10 @@ $$
 
 Concatenate all 2-bit chunks in order.
 
+
+---
+
+
 ## 5. Step-by-Step Solve
 
 1. **Download** the entire server output (a few KB).
@@ -103,6 +114,10 @@ Concatenate all 2-bit chunks in order.
 5. **Translate** each $P$ to two bits, build a long bit string.
 6. **Trim** to a multiple of 8 bits, split into bytes, interpret as ASCII.
 7. **Extract** the flag
+
+
+---
+
 
 ## 6. Solve
 
@@ -166,6 +181,10 @@ text = "".join(chr(int(bits[i:i+8],2)) for i in range(0,len(bits),8))
 print(text)
 ```
 
+
+---
+
+
 ## 7. Why It Works
 
 - **Global phase** ignored: ±1 doesn’t change Bell type.
@@ -175,4 +194,5 @@ print(text)
 This method is robust to duplicate lines (removing duplicates optional) and prints, in order, exactly the bits Bob intended to send.
 
 Much love 💋
+
 Ap4sh
