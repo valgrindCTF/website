@@ -162,7 +162,10 @@ class Post:
     content: str
     tags: List[str]
 
-markdowner = markdown.Markdown(output_format="html5")
+markdowner = markdown.Markdown(
+    output_format="html5",
+    extensions=['fenced_code', 'codehilite', 'mdx_math', 'tables']
+)
 
 def md_context(template):
     post = frontmatter.load(template.filename)

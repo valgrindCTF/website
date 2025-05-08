@@ -18,13 +18,14 @@ Alice and Bob share a zero-noise quantum link and repeatedly prepare Bell pairs.
   
     …
 
-- Each `Matrix([[a0], [a1], [a2], [a3]])` represents a 2-qubit pure state 
+- Each `Matrix([[a0], [a1], [a2], [a3]])` represents a 2-qubit pure state
 
 $$
 \ket\psi = a_0\ket{00} + a_1\ket{01} + a_2\ket{10} + a_3\ket{11}\
 $$
 
 ---
+
 ## 2. Bell States
 
 There are four maximally entangled Bell basis states:
@@ -100,7 +101,6 @@ Concatenate all 2-bit chunks in order.
 6. **Trim** to a multiple of 8 bits, split into bytes, interpret as ASCII.
 7. **Extract** the flag
 
-
 ## 6. Solve
 
 ```python
@@ -170,6 +170,5 @@ print(text)
 - Standard **super-dense coding** mapping recovers the original 2-bit message sequence.
 
 This method is robust to duplicate lines (removing duplicates optional) and prints, in order, exactly the bits Bob intended to send.
-
 
 Much love 💋
