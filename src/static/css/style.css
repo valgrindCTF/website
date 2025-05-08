@@ -4,6 +4,12 @@ h1 {
     color: var(--header-color);
 }
 
+.rellax {
+    will-change: transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+
 .parallax-container {
     width: 100vw;
     margin-left: calc(-50vw);

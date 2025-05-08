@@ -235,7 +235,7 @@ ENV_GLOBALS = {
     "members": MEMBERS
 }
 
-def compress_static():
+def compress_static(max_width=2000, max_height=2000):
     shutil.rmtree("build/static", ignore_errors=True)
     os.makedirs("build/static", exist_ok=True)
     
@@ -254,14 +254,25 @@ def compress_static():
             with open(png_file, 'rb') as f:
                 file_hash = hashlib.md5(f.read()).hexdigest()
             
-            cache_path = cache_dir / f"{file_hash}.webp"
+            cache_key = f"{file_hash}_{max_width}x{max_height}"
+            cache_path = cache_dir / f"{cache_key}.webp"
             webp_path = (out_path / rel_path.stem).with_suffix('.webp')
             
             if cache_path.exists():
                 shutil.copy2(cache_path, webp_path)
             else:
                 image = Image.open(png_file)
-                image.save(webp_path, 'WEBP', quality=80)
+                width, height = image.size
+                
+                if width > max_width or height > max_height:
+                    scale = min(max_width / width, max_height / height)
+                    new_width = int(width * scale)
+                    new_height = int(height * scale)
+                    
+                    image = image.resize((new_width, new_height), Image.LANCZOS)
+                    print(f"Resized {png_file.name}: {width}x{height} → {new_width}x{new_height}")
+                
+                image.save(webp_path, 'WEBP', quality=90)
                 shutil.copy2(webp_path, cache_path)
                 
         except Exception as e:
