@@ -12,7 +12,7 @@ In **Perfection**, the server claims to implement a perfect **one‑time pad**, 
 1. A single ciphertext of the flag (which we know starts with `UVT{…}`)
 2. An interactive oracle: anything we send is XOR’d with the **same** PRNG output that encrypted the flag
 
-By exploiting the **linearity** of the PRNG over $ \mathrm{GF}(2) $, we collect exactly as many bits of keystream as the PRNG’s 800‑bit internal state, solve a giant linear system, recover the full state, and instantly decrypt the flag.
+By exploiting the **linearity** of the PRNG over $\mathrm{GF}(2)$, we collect exactly as many bits of keystream as the PRNG’s 800‑bit internal state, solve a giant linear system, recover the full state, and instantly decrypt the flag.
 
 
 ---
