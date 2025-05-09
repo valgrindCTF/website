@@ -467,3 +467,42 @@ pre[class*="language-"].line-numbers {
     font-family: "JetBrains Mono", "Fira Code", Monaco, Consolas, "Liberation Mono", monospace;
     font-size: 0.85em;
 }
+
+/* General styling for the navigation bar for a cleaner look */
+nav ul {
+    /* If you want to center the nav items or add more specific layout, do it here */
+    /* Example: text-align: center; */
+    padding-left: 0; /* Remove default padding if holiday.css adds it */
+}
+
+nav ul li {
+    display: inline-block; /* Align items horizontally */
+    margin: 0 3px; /* Add a little space between items */
+}
+
+/* Subtle enhancement for all navigation links */
+nav ul li a {
+    padding: 8px 15px; /* Add some padding for a better clickable area */
+    border-radius: 5px; /* Slightly rounded corners for a softer look */
+    text-decoration: none; /* Ensure no underline by default */
+    color: var(--dark-link-color); /* Use your defined link color */
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out; /* Smooth transition */
+    font-weight: 500; /* A bit more presence than normal weight */
+}
+
+nav ul li a:hover,
+nav ul li a:focus { /* :focus for accessibility */
+    color: var(--dark-text-color); /* Change text color on hover, e.g., to your main text color */
+    background-color: var(--dark-link-hover-color); /* Subtle background change on hover */
+    text-decoration: none; /* Ensure no underline on hover */
+}
+
+/* Style for the kbd element in the footer, if you want to make it consistent */
+footer kbd {
+    background-color: var(--dark-highlighted-background-color);
+    border: 1px solid var(--dark-border-color);
+    border-radius: 4px;
+    padding: 2px 5px;
+    font-family: "JetBrains Mono", "Fira Code", Monaco, Consolas, "Liberation Mono", monospace;
+    color: var(--header-color);
+}

@@ -13,7 +13,7 @@ Since we're an international team, we don't want to discriminate based on knowle
 
 If your application is selected, we will follow up with you in a DM to the Discord username you provide. You may be asked to solve a few simple sanity check challenges in your specialty categories, and you may also be subject to a 1-3 week trial period before your application is finalized as either an acceptance or a rejection.
 
-<form action="http://recruitment.internal.valgrindc.tf/form" method="post">
+<form action="https://recruitment.internal.valgrindc.tf/form" method="post">
     <label for="name">Name:</label>
     <input type="text" id="name" name="name" required>
     <label for="discord">Discord:</label>
