@@ -43,25 +43,25 @@ Enter hex string:
 The C source defines a PRNG with a 25 × 32-bit (800‑bit) state vector $S$, updated as follows:
 
 1.  **Twist & merge**:
-{% raw %}
+
 $$
 x = (s_k \mathbin{\texttt{\&}} \operatorname{UMASK}) \mathbin{\texttt{|}} (s_{k-(n-1)} \mathbin{\texttt{\&}} \operatorname{LMASK}), \quad xA = x\gg1 \oplus \begin{cases}a,& x \mathbin{\texttt{\&}} 1=1\\0,& x \mathbin{\texttt{\&}} 1=0\end{cases}
 $$
-{% endraw %}
+
 
 2.  **Feedback**:
-{% raw %}
+
 $$
 x' = s_{k-(n-m)} \oplus xA,\quad s_k \leftarrow x',\quad k \leftarrow (k+1)\bmod n
 $$
-{% endraw %}
+
 
 3.  **Tempering** (like MT):
-{% raw %}
+
 $$
 y = x'\oplus(x'\gg u),\quad y \mathrel{{\oplus}{=}} ((y\ll s) \mathbin{\texttt{\&}} b), \quad y \mathrel{{\oplus}{=}} ((y\ll t) \mathbin{\texttt{\&}} c), \quad z = y\oplus(y\gg l)
 $$
-{% endraw %}
+
 
 All operations (XOR, bit‑shifts, AND‑masks) are **linear** over $GF(2)$
 
