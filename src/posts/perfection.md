@@ -14,7 +14,9 @@ In **Perfection**, the server claims to implement a perfect **one‑time pad**, 
 
 By exploiting the **linearity** of the PRNG over $\mathrm{GF}(2)$, we collect exactly as many bits of keystream as the PRNG’s 800‑bit internal state, solve a giant linear system, recover the full state, and instantly decrypt the flag.
 
+
 ---
+
 
 ## 1. Challenge Description
 
@@ -36,7 +38,9 @@ Enter hex string:
 
 **Goal**: Recover `UVT{…}` without knowing the seed
 
+
 ---
+
 
 ## 2. PRNG Architecture
 
@@ -45,7 +49,7 @@ The C source defines a PRNG with a 25 × 32-bit (800‑bit) state vector $S$, up
 1.  **Twist & merge**:
 
 $$
-x = (s_k \mathbin{\texttt{\&}} \operatorname{UMASK}) \mathbin{\texttt{|}} (s_{k-(n-1)} \mathbin{\texttt{\&}} \operatorname{LMASK}), \quad xA = x\gg1 \oplus \begin{cases}a,& x \mathbin{\texttt{\&}} 1=1\\0,& x \mathbin{\texttt{\&}} 1=0\end{cases}
+x = (s_k \mathbin{\&} \operatorname{UMASK}) \mathbin{|} (s_{k-(n-1)} \mathbin{\&} \operatorname{LMASK}), \quad xA = x\gg1 \oplus \begin{cases}a,& x \mathbin{\&} 1=1\\0,& x \mathbin{\&} 1=0\end{cases}
 $$
 
 
@@ -59,9 +63,8 @@ $$
 3.  **Tempering** (like MT):
 
 $$
-y = x'\oplus(x'\gg u),\quad y \mathrel{{\oplus}{=}} ((y\ll s) \mathbin{\texttt{\&}} b), \quad y \mathrel{{\oplus}{=}} ((y\ll t) \mathbin{\texttt{\&}} c), \quad z = y\oplus(y\gg l)
+y = x'\oplus(x'\gg u),\quad y \leftarrow y \oplus ((y\ll s) \mathbin{\&} b), \quad y \leftarrow y \oplus ((y\ll t) \mathbin{\&} c), \quad z = y\oplus(y\gg l)
 $$
-
 
 All operations (XOR, bit‑shifts, AND‑masks) are **linear** over $GF(2)$
 
@@ -79,7 +82,9 @@ Constants:
 |    $b$    | 0x2B5B2500    |
 |    $c$    | 0xDB8B0000    |
 
+
 ---
+
 
 ## 3. OTP Reuse Flaw
 
@@ -91,7 +96,9 @@ A **true** OTP requires a fresh, random pad for each message. Here:
 
 Since the PRNG’s internal state is exactly **800 bits**, observing **800** consecutive output bits fully determines the state.
 
+
 ---
+
 
 ## 4. Linear State-Recovery Attack
 
@@ -111,7 +118,9 @@ $$
 
 This recovers the **exact** 800‑bit state in one shot.
 
+
 ---
+
 
 ## 5. Matrix Construction & GF(2) Algebra
 
@@ -141,7 +150,9 @@ def build_matrix(start_idx):
 
 > **Performance**: ~4 s to build the matrix, ~1 s to solve a dense 800×800 system on a simple laptop.
 
+
 ---
+
 
 ## 6. Full Python/Sage Implementation
 
@@ -245,7 +256,9 @@ flag = bytes(a ^ b for a, b in zip(ct, stream[:len(ct)]))
 print(flag.decode())
 ```
 
+
 ---
+
 
 ## 7. Step-by-Step Execution
 
@@ -268,4 +281,5 @@ print(flag.decode())
 
 
 Much love 💋
+
 Ap4sh
