@@ -7,13 +7,11 @@
     <meta name="title" content="valgrind" />
     <meta name="description" content="{{ meta_desc }}" />
 
-    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="{{ meta_url }}" />
     <meta property="og:title" content="{{ meta_title }}" />
     <meta property="og:description" content="{{ meta_desc }}" />
 
-    <!-- Twitter -->
     <meta property="twitter:url" content="{{ meta_url }}" />
     <meta property="twitter:title" content="{{ meta_title }}" />
     <meta property="twitter:description" content="{{ meta_desc }}" />
@@ -31,8 +29,8 @@
     <script type="text/x-mathjax-config">
         MathJax.Hub.Config({
             tex2jax: {
-                inlineMath: [['$','$'], ['\\(','\\)']],
-                displayMath: [['$$','$$'], ['\\[','\\]']],
+                inlineMath: [['<span class="math-inline">','</span>'], ['\\(','\\)']],
+                displayMath: [['<span class="math-block">','</span>'], ['\\[','\\]']],
                 processEscapes: true
             },
             TeX: {
@@ -66,7 +64,7 @@
         {% block main %}{% endblock %}
     </main>
     <footer>
-        <p>&copy; {{ year }} valgrind. Site made with ❤️ by N3rdL0rd. Press <kbd>`</kbd> (tilde) to enter CLI mode.</p>
+        <p>&copy; {{ year }} valgrind. Site made with ❤️ by N3rdL0rd. Press <kbd>`</kbd> (tilde), <kbd>AltGr</kbd> + <kbd>é</kbd> (2), or <kbd>AltGr</kbd> + <kbd>è</kbd> (7) to enter CLI mode.</p>
         <noscript>
             <br>
             <p>JavaScript is disabled. This affects nothing on the site, have a nice day!</p>
@@ -75,8 +73,27 @@
     {% block scripts %}{% endblock %}
     <script>
         document.addEventListener('keydown', function(e) {
+            // Check for tilde (`)
             if (e.key === '`') {
                 document.location.href = "/cli";
+                return;
+            }
+
+            // Check for AltGr (often Ctrl+Alt) + é (2) or è (7) for AZERTY
+            // `e.getModifierState("AltGraph")` is the most reliable way to check for AltGr
+            // but not all browsers might fully support it or report it consistently with `e.key`
+            // So we also check for common Ctrl+Alt fallback and specific keys '2' or '7'
+            const isAltGrPressed = e.getModifierState("AltGraph") || (e.ctrlKey && e.altKey);
+
+            if (isAltGrPressed) {
+                if (e.key === 'é' || e.key === '2' || e.code === 'Digit2') { // AltGr + é (2)
+                    document.location.href = "/cli";
+                    return;
+                }
+                if (e.key === 'è' || e.key === '7' || e.code === 'Digit7') { // AltGr + è (7)
+                    document.location.href = "/cli";
+                    return;
+                }
             }
         });
     </script>
