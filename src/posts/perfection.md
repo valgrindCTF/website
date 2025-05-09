@@ -12,7 +12,7 @@ In **Perfection**, the server claims to implement a perfect **one‑time pad**, 
 1. A single ciphertext of the flag (which we know starts with `UVT{…}`)
 2. An interactive oracle: anything we send is XOR’d with the **same** PRNG output that encrypted the flag
 
-By exploiting the **linearity** of the PRNG over $\mathrm{GF}(2)$, we collect exactly as many bits of keystream as the PRNG’s 800‑bit internal state, solve a giant linear system, recover the full state, and instantly decrypt the flag.
+By exploiting the **linearity** of the PRNG over $$\mathrm{GF}(2)$$, we collect exactly as many bits of keystream as the PRNG’s 800‑bit internal state, solve a giant linear system, recover the full state, and instantly decrypt the flag.
 
 
 ---
@@ -32,7 +32,7 @@ cf925ec4f280960cabb7ed4248500658b0eaf42585b4045e
 Enter hex string:
 ```
 
-- The **first** $ L = \lceil|\text{flag}|/4\rceil $ PRNG outputs were XOR’d with the flag
+- The **first** $$L = \lceil|\text{flag}|/4\rceil$$ PRNG outputs were XOR’d with the flag
 - The server **continues** the same PRNG state for all subsequent inputs
 - On each `Enter hex string:` prompt, anything you send is XOR’d with the **next** outputs of the PRNG
 
@@ -44,7 +44,7 @@ Enter hex string:
 
 ## 2. PRNG Architecture
 
-The C source defines a PRNG with a 25 × 32-bit (800‑bit) state vector $ S $, updated as follows:
+The C source defines a PRNG with a 25 × 32-bit (800‑bit) state vector $$S$$, updated as follows:
 
 1.  **Twist & merge**:
 
@@ -66,21 +66,21 @@ $$
 y = x'\oplus(x'\gg u),\quad y \leftarrow y \oplus ((y\ll s) \mathbin{\&} b), \quad y \leftarrow y \oplus ((y\ll t) \mathbin{\&} c), \quad z = y\oplus(y\gg l)
 $$
 
-All operations (XOR, bit‑shifts, AND‑masks) are **linear** over $GF(2)$
+All operations (XOR, bit‑shifts, AND‑masks) are **linear** over $$GF(2)$$
 
 
 Constants:
 
 | Parameter | Value         |
 | :-------: | :------------ |
-|    $ n $    | 25            |
-|    $ m $    | 7             |
-|    $ w $    | 32            |
-|    $ r $    | 31            |
-|    $ a $    | 0x8EBFD028    |
-| $ u,s,t,l $ | 11, 7, 15, 18 |
-|    $ b $    | 0x2B5B2500    |
-|    $ c $    | 0xDB8B0000    |
+|    $$n$$    | 25            |
+|    $$m$$    | 7             |
+|    $$w$$    | 32            |
+|    $$r$$    | 31            |
+|    $$a$$    | 0x8EBFD028    |
+| $$u,s,t,l$$ | 11, 7, 15, 18 |
+|    $$b$$    | 0x2B5B2500    |
+|    $$c$$    | 0xDB8B0000    |
 
 
 ---
@@ -90,9 +90,9 @@ Constants:
 
 A **true** OTP requires a fresh, random pad for each message. Here:
 
-- The **flag** consumes PRNG outputs $ z0,\dots,z{L-1} $
-- The server **does not** reseed; it simply continues generating $ zL,zL+1,… $
-- By sending 100 zero‑bytes (`00…00`), we obtain $ zL $ through $ zL+24 $, i.e. **25** outputs of 32 bits = **800 bits**.
+- The **flag** consumes PRNG outputs $$z0,\dots,z{L-1}$$
+- The server **does not** reseed; it simply continues generating $$zL,zL+1,…$$
+- By sending 100 zero‑bytes (`00…00`), we obtain $$zL$$ through $$zL+24$$, i.e. **25** outputs of 32 bits = **800 bits**.
 
 Since the PRNG’s internal state is exactly **800 bits**, observing **800** consecutive output bits fully determines the state.
 
@@ -104,17 +104,17 @@ Since the PRNG’s internal state is exactly **800 bits**, observing **800** con
 
 Let:
 
-- $ \mathbf{S}\in\mathrm{GF}(2)^{800} $ be the unknown internal state **after** flag encryption.
-- We observe $ 25 $ outputs $ zL,…,zL+24 $, each 32 bits, giving $ \mathbf{Z}\in\mathrm{GF}(2)^{800} $
+- $$\mathbf{S}\in\mathrm{GF}(2)^{800}$$ be the unknown internal state **after** flag encryption.
+- We observe $$25$$ outputs $$zL,…,zL+24$$, each 32 bits, giving $$\mathbf{Z}\in\mathrm{GF}(2)^{800}$$
 
-Because each output bit is a linear function of $ \mathbf{S} $, we construct:
+Because each output bit is a linear function of $$ \mathbf{S} $$, we construct:
 
 $$
 M\,\mathbf{S} = \mathbf{Z}, \quad M\in\mathrm{GF}(2)^{800\times800}
 $$
 
-- **Column** $ i $ of $ M $: initialize the PRNG state to the unit vector $ e_i $ simulate 25 steps, collect 800 bits.
-- **Solve** $ \mathbf{S}=M^{-1}\mathbf{Z} $ in $ \mathrm{GF}(2)$
+- **Column** $$i$$ of $$M$$: initialize the PRNG state to the unit vector $$e_i$$ simulate 25 steps, collect 800 bits.
+- **Solve** $$\mathbf{S}=M^{-1}\mathbf{Z}$$ in $$\mathrm{GF}(2)$$
 
 This recovers the **exact** 800‑bit state in one shot.
 
@@ -263,20 +263,20 @@ print(flag.decode())
 ## 7. Step-by-Step Execution
 
 1. **Connect** to the server and read the intro + ciphertext
-2. **Parse** the ciphertext $ hex \rightarrow c $. Compute $ L=\lceil|c|/4\rceil $
-3. **Send** `00…00` (100 bytes) $ \rightarrow $ receive 25 PRNG outputs $ \rightarrow $ parse 200 hex chars $ \rightarrow $ $ k_0,…,k_{24} $
+2. **Parse** the ciphertext $$hex \rightarrow c$$. Compute $$L=\lceil|c|/4\rceil$$
+3. **Send** `00…00` (100 bytes) $$\rightarrow$$ receive 25 PRNG outputs $$\rightarrow$$ parse 200 hex chars $$\rightarrow$$ $$k_0,…,k_{24}$$
 4. **Construct** the 800×800 matrix by simulating each basis state through 25 PRNG steps
-5. **Solve** the $ GF(2) $ system to recover the 800‑bit state vector $ S $
-6. **Re‑temper** the first $ L $ words of $ S $ to reconstruct the keystream used on the flag
-7. **XOR** with $ c $ $ \rightarrow $ flag
+5. **Solve** the $$GF(2)$$ system to recover the 800‑bit state vector $$S$$
+6. **Re‑temper** the first $$L$$ words of $$S$$ to reconstruct the keystream used on the flag
+7. **XOR** with $$c$$ $$\rightarrow$$ flag
 
 ---
 
 ## 8. Why It Works
 
-- **Linearity**: All PRNG operations are linear over $ GF(2) $
+- **Linearity**: All PRNG operations are linear over $$GF(2)$$
 - **Exact state size**: 25×32=800 bits
-- **Sufficient output**: 25 outputs × 32 bits = 800 bits $ \rightarrow $ full rank
+- **Sufficient output**: 25 outputs × 32 bits = 800 bits $$\rightarrow$$ full rank
 - **Single inversion**: One 800×800 solve recovers the state
 
 
