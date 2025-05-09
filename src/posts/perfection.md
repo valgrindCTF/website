@@ -1,6 +1,6 @@
 ---
 title: Crypto – Perfection – UVT CTF 2025
-date: 2025-05-09
+date: "2025-05-09"
 excerpt: Writeup of the OTP‐oracle challenge "Perfection" from UVT CTF 2025
 tags: ["crypto", "linear", "algebra", "prng"]
 ---
