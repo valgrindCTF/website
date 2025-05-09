@@ -103,8 +103,8 @@ Concatenate all 2-bit chunks in order.
 ## 5. Step-by-Step Solve
 
 1. **Download** the entire server output (a few KB).
-2. **Parse** each line with a regex to extract four entries $a_0,a_1,a_2,a_3$.  
-    Convert `$[sqrt(2)/2]` $\rightarrow$ $+1$, `-sqrt(2)/2` $\rightarrow$ $-1$, `[0]` $\rightarrow$ $0$.
+2. **Parse** each line with a regex to extract four entries $[a_0,a_1,a_2,a_3]$.  
+    Convert  $\pm\sqrt2/2\rightarrow±1$, and $0 \rightarrow 0$
 
 3. **Classify** vector $v=[a_0,a_1,a_2,a_3]$:
     - If indices ${0,3}$ are non-zero ⇒ $\Phi$, else ${1,2}$ ⇒ $\Psi$.
