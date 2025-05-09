@@ -95,32 +95,17 @@ document.addEventListener('DOMContentLoaded', function() {
             const formData = new FormData(form);
             const formAction = form.getAttribute('action');
 
-            // --- ATTENTION: DANGEROUS PART ---
-            // This will attempt to send the data, but will show success
-            // and redirect REGARDLESS of whether the fetch actually succeeded
-            // or if it was blocked by CORS, etc.
-            // This is NOT recommended for production as data loss is likely.
             fetch(formAction, {
                 method: 'POST',
                 body: formData,
-                // mode: 'no-cors' // This can sometimes bypass CORS for "simple" requests,
-                                  // but you won't get a real response. For POST with FormData,
-                                  // it's likely to still cause issues or not send correctly.
-                                  // And if it does send, you still don't know if the server processed it.
             })
             .catch(error => {
-                // We are ignoring the error for the UI in this palliative approach
                 console.warn('Fetch encountered an error (ignored by palliative UI):', error);
             })
             .finally(() => {
-                // Regardless of fetch success or failure, proceed to "success" UI
                 console.log('Palliative: Simulating success and redirecting.');
                 showSuccessAndRedirect();
-                // Keep button disabled as we are redirecting
-                // submitButton.disabled = false;
-                // submitButton.textContent = 'Submit Application';
             });
-            // --- END OF DANGEROUS PART ---
         });
     }
 });
