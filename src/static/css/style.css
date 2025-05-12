@@ -4,6 +4,20 @@ h1 {
     color: var(--header-color);
 }
 
+.responsive-logo {
+    max-width: 100%;
+    height: auto;
+    max-height: 160px;
+    display: block;
+    margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+    .responsive-logo {
+        max-height: 120px;
+    }
+}
+
 .rellax {
     will-change: transform;
     transform: translateZ(0);
