@@ -65,18 +65,11 @@ document.addEventListener('DOMContentLoaded', function() {
         // Hide the form or clear its content
         form.style.display = 'none'; 
         
-        // Display success message
         formStatusDiv.innerHTML = `
             <h1>Your application has been submitted!</h1>
             <p>If we accept your application, we'll get back to you within a week. Good luck!</p>
             <p>You will be redirected to the homepage in 5 seconds.</p>
         `;
-        formStatusDiv.style.color = 'var(--dark-success-color)';
-
-        // Redirect after a delay
-        setTimeout(function() {
-            window.location.href = '/'; // Redirect to homepage
-        }, 5000); // 5 seconds delay
     }
 
     if (form) {
