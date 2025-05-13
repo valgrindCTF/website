@@ -16,7 +16,7 @@ If your application is selected, we will follow up with you in a DM to the Disco
 <form id="applicationForm" action="https://recruitment.internal.valgrindc.tf/form" method="post">
     <label for="name">Name:</label>
     <input type="text" id="name" name="name" required>
-    <label for="discord">Discord:</label>
+    <label for="discord">Discord: (This is how we'll contact you to follow up on this application)</label>
     <input type="text" id="discord" name="discord" required>
     <label for="specialties">Category Specialties:</label>
     <input type="checkbox" id="rev" name="specialties" value="rev">
@@ -37,7 +37,7 @@ If your application is selected, we will follow up with you in a DM to the Disco
     <label for="stego">Stego</label> &nbsp;
     <input type="checkbox" id="trivia" name="specialties" value="trivia">
     <label for="trivia">Trivia</label> &nbsp;
-    <label for="supporting">Supporting Materials: (eg. blog sites, HTB profile, writeups, previous CTF teams, etc.)</label>
+    <label for="supporting">Supporting Materials: (eg. blog sites, HTB profile, writeups, previous CTF teams, Twitter/socials, etc.)</label>
     <textarea name="supporting" id="supporting" placeholder="https://github.com/YourUsername" required></textarea>
     <label for="writeup">Link to <i>your</i> writeup for the hardest CTF challenge you've solved.</label>
     <input type="text" id="writeup" name="writeup" required>
@@ -68,7 +68,6 @@ document.addEventListener('DOMContentLoaded', function() {
         formStatusDiv.innerHTML = `
             <h1>Your application has been submitted!</h1>
             <p>If we accept your application, we'll get back to you within a week. Good luck!</p>
-            <p>You will be redirected to the homepage in 5 seconds.</p>
         `;
     }
 
