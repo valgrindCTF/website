@@ -33,11 +33,10 @@ MEMBERS = [
         specialties=["web", "forensics", "misc"],
         image="quantum.webp",
         bio="Skid wannabe hacker",
-        facts=["Insomniac", "It's pronounced \"Voodoo\"", "Dark mode only"],
+        facts=["Formerly known as quantum", "Insomniac", "It's pronounced \"Voodoo\"", "Dark mode only"],
         socials=[
             Social(fa="fab fa-github", url="https://github.com/ShellUnease", name="GitHub"),
             Social(fa="fab fa-discord", url="https://discord.com/users/1193905666876768286", name="Discord"),
-            Social(fa="fa fa-globe", url="https://qv4.xyz/", name="Website"),
         ]
     ),
     Member(
