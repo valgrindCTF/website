@@ -39,6 +39,10 @@ If your application is selected, we will follow up with you in a DM to the Disco
     <label for="trivia">Trivia</label> &nbsp;
     <label for="supporting">Supporting Materials: (eg. blog sites, HTB profile, writeups, previous CTF teams, etc.)</label>
     <textarea name="supporting" id="supporting" placeholder="https://github.com/YourUsername" required></textarea>
+    <label for="writeup">Link to <i>your</i> writeup for the hardest CTF challenge you've solved.</label>
+    <input type="text" id="writeup" name="writeup" required>
+    <label for="commit">How many times, on average, can you commit to being available for CTFs a month?</label>
+    <input type="text" id="commit" name="commit" required>
     <label for="why">Why valgrind? Why not some other team? (1 sentence minimum)</label>
     <textarea name="why" id="why" placeholder="I want to join valgrind because... (they place well in competitions, I like their logo, Tx told me to, etc.)" required></textarea>
     <label for="where">Where are you located in the world? What's your timezone? What's your primary language, and how well do you know English?</label>
