@@ -45,12 +45,12 @@ If your application is selected, we will follow up with you in a DM to the Disco
     <input type="text" id="commit" name="commit" required>
     <label for="experience_years">How many years of CTF experience do you have?</label>
     <input type="number" id="experience_years" name="experience_years" min="0" placeholder="e.g. 3">
-    <label for="anything_else">Anything else?</label>
-    <textarea name="anything_else" id="anything_else" placeholder="Any other information you'd like to share..."></textarea>
     <label for="why">Why valgrind? Why not some other team? (1 sentence minimum)</label>
     <textarea name="why" id="why" placeholder="I want to join valgrind because... (they place well in competitions, I like their logo, Tx told me to, etc.)" required></textarea>
     <label for="where">Where are you located in the world? What's your timezone? What's your primary language, and how well do you know English?</label>
     <textarea name="where" id="where" placeholder="I'm in Antarctica, my timezone is CST, my primary language is English and I've spoken it since birth." required></textarea>
+    <label for="anything_else">Anything else?</label>
+    <textarea name="anything_else" id="anything_else" placeholder="Any other information you'd like to share..."></textarea>
     <label for="accept">I accept that this information will be shared internally in valgrind. I understand that by submitting this information I am committing to applying to valgrind and I am prepared to continue an application process in the future.</label><input type="checkbox" id="accept" name="accept" value="accept" required>
     <br><br>
     <button type="submit" id="submitButton" class="btn-like">Submit Application</button>
