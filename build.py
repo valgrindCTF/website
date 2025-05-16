@@ -147,8 +147,8 @@ MEMBERS = [
         facts=["my search history would worry a normal person"],
         socials=[
             Social(fa="fa fa-globe", url="https://ap4sh.guru/", name="Website"),
-            Social(fa="fab fa-discord", url="https://discord.com/users/1032261229626003537", name="Discord Ap4sh"),
-            Social(fa="fab fa-discord", url="https://discord.com/users/1193168699365019679", name="Discord Bak"),
+            Social(fa="fab fa-discord", url="https://discord.com/users/1032261229626003537", name="Discord"),
+            Social(fa="fas fa-cube", url="https://app.hackthebox.com/users/377742", name="HTB"),
         ]
     ),
 ]
