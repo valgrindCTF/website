@@ -119,16 +119,6 @@ MEMBERS = [
         ]
     ),
     Member(
-        name="rethinkrubiks",
-        specialties=["crypto"],
-        image="rethinkrubiks.webp",
-        bio="Math one-trick",
-        facts=["i play osu", "idk anything fun abt myself 😹"],
-        socials=[
-            Social(fa="fab fa-discord", url="https://discord.com/users/392673710563262474", name="Discord"),
-        ]
-    ),
-    Member(
         name="gtronous",
         specialties=["forensics", "misc", "osint"],
         image="megatron.webp",
@@ -137,6 +127,16 @@ MEMBERS = [
         socials=[
             Social(fa="fa fa-globe", url="https://gtronous.github.io/", name="Website"),
             Social(fa="fab fa-github", url="https://github.com/gtronous", name="GitHub"),
+        ]
+    ),
+    Member(
+        name="rethinkrubiks",
+        specialties=["crypto"],
+        image="rethinkrubiks.webp",
+        bio="Math one-trick",
+        facts=["i play osu", "idk anything fun abt myself 😹"],
+        socials=[
+            Social(fa="fab fa-discord", url="https://discord.com/users/392673710563262474", name="Discord"),
         ]
     ),
     Member(
@@ -149,6 +149,22 @@ MEMBERS = [
             Social(fa="fa fa-globe", url="https://ap4sh.guru/", name="Website"),
             Social(fa="fab fa-discord", url="https://discord.com/users/1032261229626003537", name="Discord"),
             Social(fa="fas fa-cube", url="https://app.hackthebox.com/users/377742", name="HTB"),
+        ]
+    ),
+    Member(
+        name="stelin41",
+        specialties=["ai", "ml", "web", "misc", "crypto"],
+        image="stelin.webp",
+        bio="Introvert whose parahippocampal cortex is half allocated to computer science",
+        facts=["I've been into AI since before it was trendy", "I guessed half of my school's passwords on the first try", "I like anime, nature and books"],
+        socials=[
+            Social(fa="fab fa-discord", url="https://discord.com/users/561244702561665044", name="Discord"),
+            Social(fa="fab fa-github", url="https://github.com/stelin41", name="GitHub"),
+            Social(fa="fab fa-twitter", url="https://twitter.com/stelin41", name="Twitter"),
+            Social(fa="fab fa-mastodon", url="https://ioc.exchange/@stelin41", name="Mastodon (ioc.exchange)"),
+            Social(fa="fab fa-youtube", url="https://youtube.com/@stelin41", name="Youtube"),
+            Social(fa="fa fa-globe", url="https://stelin41.github.io/", name="Website"),
+            Social(fa="fas fa-cube", url="https://app.hackthebox.com/profile/951417", name="HTB"),
         ]
     ),
 ]
