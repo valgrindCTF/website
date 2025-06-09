@@ -56,7 +56,7 @@ So at the moment being a bit familiar with UDS messages I immediately searched f
 
 I'm not going deep into UDS here, just note that this response's data length is 0x14 and its split across multiple packets. In order to get remaining data, sender (733) should issue SYNC packet and wait for remaining parts, here is the rest of vin query:
 
-```v
+```plain
   vcan0  733   [8]  30 00 00 00 00 00 00 00
   ... snip ...
   vcan0  73B   [8]  21 48 4B 37 44 38 32 42
@@ -132,7 +132,7 @@ ID 73B has 17 unique values: ['0267160000000000', ...]
 
 ID 465 looks incredibly packed with data, here is its values ordered by presence in the log file:
 
-```plain
+```unknown
 66 16 1A 08 1A 2B AE 00
 66 15 06 08 1A 29 20 00
 66 14 4C 08 1A 21 8B 00
@@ -154,7 +154,7 @@ So its indeed packed GPS coordinates. As we need only last location of the vehic
 
 So we need to extract the following parts:
 
-```plain
+```unknown
 8 bits for lat degrees
 6 bits for lat minutes
 14 bits for lat min fractions
@@ -189,7 +189,7 @@ Lon Deg = 80 + 179 = 259 = 0x103
 
 At this point we are ready to look into captured messages again:
 
-```plain
+```unknown
 66 16 1A 08 1A 2B AE 00
 66 15 06 08 1A 29 20 00
 66 14 4C 08 1A 21 8B 00
