@@ -293,19 +293,21 @@ Some points to take note:
 
 Using this information lets try to read DBC file:
 
-1. GPS_Latitude_Degrees
+#### GPS_Latitude_Degrees
 
 Starts from bit 7, length 8 bits, big endian and unsigned (@0+), scale 1, offset -89
 
 Its big endian so in order to extract it you should start from bit 7 and go down to bit 0, lets do it using image:
+
 ![lat deg](/static/img/posts/2025-bi0s-hw-madras/lat-deg.webp)
 
-2. GPS_Latitude_Minutes
+#### GPS_Latitude_Minutes
 
 Starts from bit 15, length 6 bits, big endian and unsigned (@0+), scale 1, offset 0:
+
 ![lat min](/static/img/posts/2025-bi0s-hw-madras/lat-min.webp)
 
-3. GPS_Latitude_Min_dec
+#### GPS_Latitude_Min_dec
 
 Starts from bit 9, length 14 bits, big endian and unsigned (@0+), scale 0.0001, offset 0
 
