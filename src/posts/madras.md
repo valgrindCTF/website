@@ -21,7 +21,7 @@ Not a hard hardware challenge involving parsing CAN bus log tho many people find
 
 We presented 38Mbyte canlog.txt with contents like:
 
-```txt
+```plain
 ... snip ...
   vcan1  095   [8]  80 00 07 F4 00 00 00 17
   vcan1  1A4   [8]  00 00 00 08 00 00 00 10
@@ -49,14 +49,14 @@ This is my second time to mess with CAN communications, previous one was at the 
 
 So at the moment being a bit familiar with UDS messages I immediately searched for `22 F1 90` which is commonly used to query VIN and got match:
 
-```txt
+```plain
   vcan0  733   [8]  03 22 F1 90 00 00 00 00
   vcan0  73B   [8]  10 14 62 F1 90 31 46 4D
 ```
 
 I'm not going deep into UDS here, just note that this response's data length is 0x14 and its split across multiple packets. In order to get remaining data, sender (733) should issue SYNC packet and wait for remaining parts, here is the rest of vin query:
 
-```txt
+```v
   vcan0  733   [8]  30 00 00 00 00 00 00 00
   ... snip ...
   vcan0  73B   [8]  21 48 4B 37 44 38 32 42
@@ -88,7 +88,7 @@ Lets [decode](https://vpic.nhtsa.dot.gov/decoder/Decoder?VIN=1FMHK7D82BGA34954&M
 
 When I came to this challenge one of my team-mates (@Rev) already did some frequency analysis:
 
-```txt
+```plain
 ID 095 has 8 unique values: ['800007F400000008', ...]
 ID 1A4 has 4 unique values: ['0000000800000001', ...]
 ID 423 has 592 unique values: ['0036000000', ...]
@@ -132,7 +132,7 @@ ID 73B has 17 unique values: ['0267160000000000', ...]
 
 ID 465 looks incredibly packed with data, here is its values ordered by presence in the log file:
 
-```hexdump
+```plain
 66 16 1A 08 1A 2B AE 00
 66 15 06 08 1A 29 20 00
 66 14 4C 08 1A 21 8B 00
@@ -154,7 +154,7 @@ So its indeed packed GPS coordinates. As we need only last location of the vehic
 
 So we need to extract the following parts:
 
-```txt
+```plain
 8 bits for lat degrees
 6 bits for lat minutes
 14 bits for lat min fractions
@@ -189,7 +189,7 @@ Lon Deg = 80 + 179 = 259 = 0x103
 
 At this point we are ready to look into captured messages again:
 
-```hexdump
+```plain
 66 16 1A 08 1A 2B AE 00
 66 15 06 08 1A 29 20 00
 66 14 4C 08 1A 21 8B 00
@@ -218,7 +218,7 @@ Lets check obvious assumption:
 
 1. Convert coord line to binary byte by byte:
 
-```txt
+```plain
     Byte 0: 0x66 = 01100110
     Byte 1: 0x0d = 00001101
     Byte 2: 0xf4 = 11110100
@@ -243,7 +243,7 @@ Lets check obvious assumption:
 
 5. Add offsets/scale as specified in table above:
 
-```txt
+```plain
 Lat Deg = 102 - 89 = 13
 Lat Min = 3
 Lat MFr = 8004/10000 = 0.8004
@@ -264,7 +264,7 @@ Checked it and yup, we have a flag!
 
 Initially I thought that its a challenge author decision to encode GPS coords that way but eventually @Sylvie got posted this dbc snipped to bi0s ctf discord and it appears to be working:
 
-```txt
+```plain
 BO_ 1125 GPS_Data_Nav_1: 8  XXX
  SG_ GPS_Longitude_Minutes        : 34|6@0+ (1,0)    [0|0] "Minutes" XXX
  SG_ GPS_Longitude_Min_dec        : 44|14@0+ (0.0001,0)[0|0] "Minutes" XXX
