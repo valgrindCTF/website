@@ -180,7 +180,7 @@ class Post:
 
 markdowner = markdown.Markdown(
     output_format="html5",
-    extensions=['fenced_code', 'codehilite', 'mdx_math', 'tables']
+    extensions=['fenced_code', 'codehilite', 'mdx_math', 'tables', 'extra', 'admonition', 'toc']
 )
 
 def md_context(template):
