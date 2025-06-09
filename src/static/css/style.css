@@ -520,3 +520,22 @@ footer kbd {
     font-family: "JetBrains Mono", "Fira Code", Monaco, Consolas, "Liberation Mono", monospace;
     color: var(--header-color);
 }
+
+/* allows to align images left/right/center in markdown */
+/* see https://stackoverflow.com/a/39614958/25287914 */
+
+img[alt$=">"] {
+    float: right;
+}
+
+img[alt$="<"] {
+    float: left;
+}
+
+img[alt$="><"] {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: auto;
+    float: none!important;
+}
