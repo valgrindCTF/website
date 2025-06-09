@@ -8,7 +8,10 @@ tags: ["hw", "rev"]
 ## Overview
 
 ![challenge description](/static/img/posts/2025-bi0s-hw-madras/descr.webp)
+
 Solves: 4
+
+![solves](/static/img/posts/2025-bi0s-hw-madras/solves.webp)
 
 Not a hard hardware challenge involving parsing CAN bus log tho many people find it confusing and struggle to get correct results so I decided to issue this writeup
 
@@ -336,5 +339,3 @@ But its actual bit **49** of **big endian** notation and you need to extract 14 
 --
 
 BR, ed
-
-https://www.valgrindc.tf/static//static/img/members/ed.webp
