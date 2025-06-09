@@ -65,7 +65,7 @@ MEMBERS = [
     ),
     Member(
         name="ed",
-        specialties=["pwn", "rev"],
+        specialties=["pwn", "rev", "web"],
         image="ed.webp",
         bio="evolved to kagura",
         facts=["Saying thanks to gpt wastes 0.003 kWh"],
@@ -180,7 +180,12 @@ class Post:
 
 markdowner = markdown.Markdown(
     output_format="html5",
-    extensions=['fenced_code', 'codehilite', 'mdx_math', 'tables', 'extra', 'admonition', 'toc']
+    extensions=['fenced_code', 'codehilite', 'mdx_math', 'tables', 'extra', 'admonition', 'toc'],
+    extension_configs={
+        'codehilite': {
+            'guess_lang': False
+        }
+    }
 )
 
 def md_context(template):
