@@ -1,7 +1,7 @@
 ---
 title: "Hardware - Lost-in-Madras - bi0s CTF 2025"
 date: "2025-06-09"
-excerpt: "Writeup of the Lost-in-Madras challenge from bi0s CTF 2025"
+excerpt: "Or; Epic Fail by the Challenge Creator—They Got Their Own Flag DEAD WRONG and You Won't Believe Why"
 tags: ["hw", "rev"]
 ---
 
