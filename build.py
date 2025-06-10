@@ -26,6 +26,7 @@ class Member:
     bio: str
     facts: List[str]
     socials: List[Social]
+    countries: List[str]
 
 MEMBERS = [
     Member(
@@ -38,7 +39,8 @@ MEMBERS = [
             Social(fa="fab fa-github", url="https://github.com/ShellUnease", name="GitHub"),
             Social(fa="fab fa-discord", url="https://discord.com/users/1193905666876768286", name="Discord"),
             Social(fa="fas fa-cube", url="https://app.hackthebox.com/users/1689134", name="HTB"),
-        ]
+        ],
+        countries=["pol"]
     ),
     Member(
         name="N3rdL0rd",
@@ -51,7 +53,8 @@ MEMBERS = [
             Social(fa="fab fa-discord", url="https://discord.com/users/710879687211089992", name="Discord"),
             Social(fa="fas fa-envelope", url="mailto:n3rdl0rd@proton.me", name="Email"),
             Social(fa="fas fa-book-open", url="https://github.com/N3rdL0rd/writeups", name="Writeups"),
-        ]
+        ],
+        countries=["can", "usa"]
     ),
     Member(
         name="acters",
@@ -61,7 +64,8 @@ MEMBERS = [
         facts=["Likes light mode for some horrible reason."],
         socials=[
             Social(fa="fab fa-discord", url="https://discord.com/users/156840430099496960", name="Discord"),
-        ]
+        ],
+        countries=["per", "usa"]
     ),
     Member(
         name="ed",
@@ -71,7 +75,8 @@ MEMBERS = [
         facts=["Saying thanks to gpt wastes 0.003 kWh"],
         socials=[
             Social(fa="fab fa-discord", url="https://discord.com/users/881495305638535209", name="Discord"),
-        ]
+        ],
+        countries=["rus"]
     ),
     Member(
         name="nolang",
@@ -83,7 +88,8 @@ MEMBERS = [
             Social(fa="fa fa-globe", url="https://nolangilardi.github.io/", name="Website"),
             Social(fa="fab fa-github", url="https://github.com/nolangilardi", name="GitHub"),
             Social(fa="fab fa-discord", url="https://discord.com/users/830070935817158670", name="Discord"),
-        ]
+        ],
+        countries=["idn"]
     ),
     Member(
         name="Pyp",
@@ -95,7 +101,8 @@ MEMBERS = [
             Social(fa="fa fa-globe", url="https://pyp-s-blog.web.app/", name="Website"),
             Social(fa="fab fa-github", url="https://github.com/Pyp-3/", name="GitHub"),
             Social(fa="fab fa-discord", url="https://discord.com/users/1190161788453519422", name="Discord"),
-        ]
+        ],
+        countries=["gbr"]
     ),
     Member(
         name="m1t0",
@@ -106,7 +113,8 @@ MEMBERS = [
         socials=[
             Social(fa="fab fa-discord", url="https://discord.com/users/797313664084082728", name="Discord"),
             Social(fa="fab fa-github", url="https://github.com/mito753", name="GitHub")
-        ]
+        ],
+        countries=["jpn"]
     ),
     Member(
         name="Rev",
@@ -116,7 +124,8 @@ MEMBERS = [
         facts=["Addicted to CTFs", "I solved a crypto challenge during a toilet break in the middle of my midterm..."],
         socials=[
             Social(fa="fab fa-discord", url="https://discord.com/users/368727891023757312", name="Discord"),
-        ]
+        ],
+        countries=["idn", "can", "usa"]
     ),
     Member(
         name="gtronous",
@@ -127,7 +136,8 @@ MEMBERS = [
         socials=[
             Social(fa="fa fa-globe", url="https://gtronous.github.io/", name="Website"),
             Social(fa="fab fa-github", url="https://github.com/gtronous", name="GitHub"),
-        ]
+        ],
+        countries=["irl"]
     ),
     Member(
         name="rethinkrubiks",
@@ -137,7 +147,8 @@ MEMBERS = [
         facts=["i play osu", "idk anything fun abt myself 😹"],
         socials=[
             Social(fa="fab fa-discord", url="https://discord.com/users/392673710563262474", name="Discord"),
-        ]
+        ],
+        countries=["can", "idn"]
     ),
     Member(
         name="Ap4sh",
@@ -149,7 +160,8 @@ MEMBERS = [
             Social(fa="fa fa-globe", url="https://ap4sh.guru/", name="Website"),
             Social(fa="fab fa-discord", url="https://discord.com/users/1032261229626003537", name="Discord"),
             Social(fa="fas fa-cube", url="https://app.hackthebox.com/users/377742", name="HTB"),
-        ]
+        ],
+        countries=["fra"]
     ),
     Member(
         name="stelin41",
@@ -165,7 +177,8 @@ MEMBERS = [
             Social(fa="fab fa-youtube", url="https://youtube.com/@stelin41", name="Youtube"),
             Social(fa="fa fa-globe", url="https://stelin41.github.io/", name="Website"),
             Social(fa="fas fa-cube", url="https://app.hackthebox.com/profile/951417", name="HTB"),
-        ]
+        ],
+        countries=["esp"]
     ),
 ]
 
