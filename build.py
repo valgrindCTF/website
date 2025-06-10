@@ -76,7 +76,7 @@ MEMBERS = [
         socials=[
             Social(fa="fab fa-discord", url="https://discord.com/users/881495305638535209", name="Discord"),
         ],
-        countries=["rus"]
+        countries=["prk"]
     ),
     Member(
         name="nolang",
