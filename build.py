@@ -125,7 +125,7 @@ MEMBERS = [
         socials=[
             Social(fa="fab fa-discord", url="https://discord.com/users/368727891023757312", name="Discord"),
         ],
-        countries=["idn", "can", "usa"]
+        countries=["idn", "can"]
     ),
     Member(
         name="gtronous",
