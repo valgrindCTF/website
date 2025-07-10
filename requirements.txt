@@ -6,3 +6,4 @@ pillow
 tqdm
 python-markdown-math
 catppuccin[pygments]
+requests

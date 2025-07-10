@@ -3,6 +3,7 @@ title: "Crypto - Quantum Detanglement – UVT CTF 2025"
 date: "2025-05-08"
 excerpt: "Writeup of the hardest crypto challenge Quantum Detanglement from UVT CTF 2025"
 tags: ["crypto", "quantum"]
+author: "Ap4sh"
 ---
 
 ## Overview

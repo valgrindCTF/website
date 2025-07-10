@@ -12,6 +12,12 @@ h1 {
     margin: 0 auto;
 }
 
+.tagline {
+    text-align: center;
+    color: var(--dark-link-color);
+    font-weight: bold;
+}
+
 @media (max-width: 768px) {
     .responsive-logo {
         max-height: 120px;

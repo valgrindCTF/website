@@ -10,6 +10,9 @@
     <main class="main-content">
         <article class="post-content">
             <h1>{{ post.title|safe }}</h1>
+            {% if post.author %}
+                <h3>Written by {{ post.author }}</h3>
+            {% endif %}
             {% for tag in post.tags %}
             <a class="tag" href="/posts/tag/{{ tag }}">{{ tag }}</a>
             {% endfor %}

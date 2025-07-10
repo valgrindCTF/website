@@ -5,12 +5,13 @@ import frontmatter
 import markdown
 import os
 from pathlib import Path
-from typing import List, Literal
+from typing import List, Literal, Optional
 import shutil
 from PIL import Image
 from tqdm import tqdm
 import argparse
 import hashlib
+import requests
 
 @dataclass
 class Social:
@@ -190,6 +191,7 @@ class Post:
     url: str
     content: str
     tags: List[str]
+    author: Optional[str] = None
 
 markdowner = markdown.Markdown(
     output_format="html5",
@@ -212,7 +214,8 @@ def md_context(template):
             excerpt=post.metadata.get('excerpt', ''),
             url=f"/posts/{Path(template.name).stem}",
             content=content_html,
-            tags=post.metadata.get('tags', [])
+            tags=post.metadata.get('tags', []),
+            author=post.metadata.get('author', None)
         )
     }
 
@@ -262,11 +265,31 @@ def generate_tag_pages(site, posts):
         os.makedirs(out.parent, exist_ok=True)
         site.get_template("_tag.html").stream(tag=tag, posts=tagged_posts).dump(str(out), encoding="utf-8")
 
+        def ordinal(n: int) -> str:
+            if 10 <= n % 100 <= 20:
+                suffix = "th"
+            else:
+                suffix = {1: "st", 2: "nd", 3: "rd"}.get(n % 10, "th")
+            return f"{n}{suffix}"
+
+r = requests.get("https://ctftime.org/api/v1/teams/355817/")
+if r.status_code == 200:
+    team_data = r.json()
+    rating = team_data['rating'][str(datetime.now().year)]["rating_place"]
+
+def ordinal(n: int) -> str:
+    if 10 <= n % 100 <= 20:
+        suffix = "th"
+    else:
+        suffix = {1: "st", 2: "nd", 3: "rd"}.get(n % 10, "th")
+    return f"{n}{suffix}"
+
 ENV_GLOBALS = {
     "year": str(datetime.now().year),
     "recent_posts": POSTS[:5],
     "posts": POSTS,
-    "members": MEMBERS
+    "members": MEMBERS,
+    "ctftime_global_rank": ordinal(rating)
 }
 
 def compress_static(max_width=2000, max_height=2000):

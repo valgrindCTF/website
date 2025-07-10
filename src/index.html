@@ -1,5 +1,6 @@
 {% set meta_title = "valgrind" %}
-{% set meta_desc = "valgrind is an international CTF team of cybersecurity professionals, enthusiasts, researchers, students, and HTB grinders. " %}
+{% set meta_desc = "valgrind is an international CTF team of cybersecurity professionals, enthusiasts, researchers,
+students, and HTB grinders. " %}
 {% set meta_url = "https://valgrindc.tf/" %}
 
 {% extends "_common.html" %}
@@ -54,46 +55,55 @@
     <main class="main-content">
         <article class="post-content">
             <h1>About Us</h1>
-            <p><a href="https://ctftime.org/team/355817">valgrind</a> is an international CTF team of cybersecurity professionals, enthusiasts, researchers, students, and HTB grinders. We operate independently of any institution or organization, focusing on collaborative learning and helping teammates improve regardless of skill level. (We would always accept sponsorships though!)</p>
+            <p class="tagline">Playing CTFs every weekend since 2024</p>
+            <p><a href="https://ctftime.org/team/355817">valgrind</a> is an international CTF team of cybersecurity
+                professionals, enthusiasts, researchers, students, and HTB grinders. We operate independently of any
+                institution or organization, funded by what we can win in competitions (but we would always accept
+                sponsorships!).
+                <br><br>
+                We're currently the {{ ctftime_global_rank }} ranked team globally on CTFtime.
+                <br><br>
+                If you think valgrind would be a good fit for you, please fill out an <a href="/posts/apply">application</a> to join!
+            </p>
             <h2>Meet the Team</h2>
             <div class="member-grid">
                 {% for member in members %}
-                    <div class="membercard">
-                        <img src="/static/img/members/{{ member.image }}" alt="{{ member.name }}" class="profile-pic">
-                        <h3>
-                            {{ member.name }}
-                            {% for country in member.countries %}
-                                <span class="flag-icon flag-icon-{{ country|lower }}"></span>
-                            {% endfor %}
-                        </h3>
-                        <div class="socials">
-                            {% for social in member.socials %}
-                                <a href="{{ social.url }}" class="social-link tooltip" target="_blank">
-                                    <span class="tooltiptext">{{ social.name }}</span>
-                                    <i class="{{ social.fa }}"></i>
-                                </a>
-                            {% endfor %}
-                        </div>
-                        <div class="specialties">
-                            {% for tag in member.specialties %}
-                                <a class="tag" href="/posts/tag/{{ tag }}">{{ tag }}</a>
-                            {% endfor %}
-                        </div>
-                        <p class="bio">{{ member.bio|safe }}</p>
-                        <div class="fun-facts">
-                            <h4>Fun Facts</h4>
-                            <ul>
-                                {% for fact in member.facts %}
-                                    <li>{{ fact }}</li>
-                                {% endfor %}
-                            </ul>
-                        </div>
+                <div class="membercard">
+                    <img src="/static/img/members/{{ member.image }}" alt="{{ member.name }}" class="profile-pic">
+                    <h3>
+                        {{ member.name }}
+                        {% for country in member.countries %}
+                        <span class="flag-icon flag-icon-{{ country|lower }}"></span>
+                        {% endfor %}
+                    </h3>
+                    <div class="socials">
+                        {% for social in member.socials %}
+                        <a href="{{ social.url }}" class="social-link tooltip" target="_blank">
+                            <span class="tooltiptext">{{ social.name }}</span>
+                            <i class="{{ social.fa }}"></i>
+                        </a>
+                        {% endfor %}
                     </div>
+                    <div class="specialties">
+                        {% for tag in member.specialties %}
+                        <a class="tag" href="/posts/tag/{{ tag }}">{{ tag }}</a>
+                        {% endfor %}
+                    </div>
+                    <p class="bio">{{ member.bio|safe }}</p>
+                    <div class="fun-facts">
+                        <h4>Fun Facts</h4>
+                        <ul>
+                            {% for fact in member.facts %}
+                            <li>{{ fact }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
                 {% endfor %}
             </div>
         </article>
     </main>
-    
+
     <aside class="blog-sidebar">
         <h1>Recent Posts</h1>
         <div class="post-preview-list">
@@ -113,11 +123,11 @@
 {% block scripts %}
 <script src="/static/rellax/rellax.min.js"></script>
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function () {
         const loader = document.getElementById('page-loader');
         const allImages = document.querySelectorAll('img');
         let imagesLoaded = 0;
-        
+
         function hideLoader() {
             setTimeout(() => {
                 loader.style.opacity = '0';
@@ -126,14 +136,14 @@
                 }, 500);
             }, 100);
         }
-        
+
         function imageLoaded() {
             imagesLoaded++;
             if (imagesLoaded === allImages.length) {
                 hideLoader();
             }
         }
-        
+
         if (allImages.length === 0) {
             hideLoader();
         } else {
@@ -145,7 +155,7 @@
                     img.addEventListener('error', imageLoaded);
                 }
             });
-            
+
             // fallback in case some images never load
             setTimeout(hideLoader, 5000);
         }
@@ -161,18 +171,18 @@
     window.addEventListener('keyup', (e) => {
         keys.push(e.key.toUpperCase());
         keys.splice(-nothingToSeeHere.length - 1, keys.length - nothingToSeeHere.length);
-        
+
         if (keys.join('') === nothingToSeeHere) {
             document.getElementById('flaglayer').src = '/static/img/landscape/5_nolang.webp';
         }
     });
 
     function scrollToContent() {
-        document.querySelector('.content-wrapper').scrollIntoView({ 
-            behavior: 'smooth' 
+        document.querySelector('.content-wrapper').scrollIntoView({
+            behavior: 'smooth'
         });
     }
-    
+
     window.addEventListener('scroll', () => {
         const scrollButton = document.querySelector('.scroll-button');
         if (window.scrollY > 0) {
