@@ -50,7 +50,7 @@ If your application is selected, we will follow up with you in a DM to the Disco
     <label for="where">Where are you located in the world? What's your timezone? What's your primary language, and how well do you know English?</label>
     <textarea name="where" id="where" placeholder="I'm in Antarctica, my timezone is CST, my primary language is English and I've spoken it since birth." required></textarea>
     <label for="space_or_oceans">Should humanity explore the oceans or space? Why? Justify your answer. (500 word max)</label>
-    <textarea name="space_or_oceans" id="space_or_oceans" placeholder="We should explore..."></textarea>
+    <textarea name="space_or_oceans" id="space_or_oceans" placeholder="We should explore..." required></textarea>
     <label for="anything_else">Anything else?</label>
     <textarea name="anything_else" id="anything_else" placeholder="Any other information you'd like to share..."></textarea>
     <label for="accept">I accept that this information will be shared internally in valgrind. I understand that by submitting this information I am committing to applying to valgrind and I am prepared to continue an application process in the future.</label><input type="checkbox" id="accept" name="accept" value="accept" required>
