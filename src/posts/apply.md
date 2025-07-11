@@ -49,7 +49,7 @@ If your application is selected, we will follow up with you in a DM to the Disco
     <textarea name="why" id="why" placeholder="I want to join valgrind because... (they place well in competitions, I like their logo, Tx told me to, etc.)" required></textarea>
     <label for="where">Where are you located in the world? What's your timezone? What's your primary language, and how well do you know English?</label>
     <textarea name="where" id="where" placeholder="I'm in Antarctica, my timezone is CST, my primary language is English and I've spoken it since birth." required></textarea>
-    <label for="space_or_oceans">time or space? (500 word min)</label>
+    <label for="space_or_oceans">Should humanity focus on exploring space or the oceans? Justify your answer. (200 word min)</label>
     <textarea name="space_or_oceans" id="space_or_oceans" placeholder="We should explore..." required></textarea>
     <label for="anything_else">Anything else?</label>
     <textarea name="anything_else" id="anything_else" placeholder="Any other information you'd like to share..."></textarea>
