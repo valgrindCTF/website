@@ -33,7 +33,7 @@ MEMBERS = [
     Member(
         name="VXXDXX",
         specialties=["web", "forensics", "misc"],
-        image="quantum.webp",
+        image="VXXDXX.webp",
         bio="Skid wannabe hacker",
         facts=["Formerly known as quantum", "Insomniac", "It's pronounced \"Voodoo\"", "Dark mode only"],
         socials=[
