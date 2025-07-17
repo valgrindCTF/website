@@ -219,11 +219,17 @@ def md_context(template):
         )
     }
 
-def render_md(site, template, **kwargs):
+def render_post_md(site, template, **kwargs):
     stem = Path(template.name).stem
     out = site.outpath / Path("posts/") / Path(stem) / Path("index.html")
     os.makedirs(out.parent, exist_ok=True)
     site.get_template("_post.html").stream(**kwargs).dump(str(out), encoding="utf-8")
+
+def render_page_md(site, template, **kwargs):
+    stem = Path(template.name).stem
+    out = site.outpath / Path(stem) / Path("index.html")
+    os.makedirs(out.parent, exist_ok=True)
+    site.get_template("_page.html").stream(**kwargs).dump(str(out), encoding="utf-8")
 
 def render_html(site, template, **kwargs):
     if template.name in ["index.html", "404.html"]:
@@ -357,8 +363,9 @@ if __name__ == "__main__":
         staticpaths=["static"],
         contexts=[(r".*\.md", md_context)],
         rules=[
-            (r".*\.md", render_md),
-            (r".*\.html", render_html),            
+            (r"achievements\.md", render_page_md),
+            (r"posts/.*\.md", render_post_md),
+            (r".*\.html", render_html),
         ],
         env_globals=ENV_GLOBALS,
     )

@@ -1,0 +1,17 @@
+{% set meta_title = post.title + " | valgrind" %}
+{% set meta_desc = "valgrind is an international CTF team of cybersecurity professionals, enthusiasts, researchers, students, and HTB grinders. " %}
+{% set meta_url = "https://valgrindc.tf/" %}
+{% extends "_common.html" %}
+
+{% block title %}{{ post.title }} | valgrind{% endblock %}
+
+{% block main %}
+<div class="content-wrapper">
+    <main class="main-content">
+        <article class="post-content">
+            <h1>{{ post.title|safe }}</h1>
+            {{ post.content|safe }}
+        </article>
+    </main>
+</div>
+{% endblock %}
