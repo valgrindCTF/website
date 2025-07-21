@@ -1,10 +1,10 @@
-pre { line-height: 125%; background-color: #1e1e2e; }
+pre { line-height: 125%; background-color: #1e1e2e; overflow-x: auto; white-space: pre; word-wrap: normal; }
 td.linenos .normal { color: #cdd6f4; background-color: #181825; padding-left: 5px; padding-right: 5px; }
 span.linenos { color: #cdd6f4; background-color: #181825; padding-left: 5px; padding-right: 5px; }
 td.linenos .special { color: #cdd6f4; background-color: #181825; padding-left: 5px; padding-right: 5px; }
 span.linenos.special { color: #cdd6f4; background-color: #181825; padding-left: 5px; padding-right: 5px; }
 .codehilite .hll { background-color: #313244 }
-.codehilite { background: #1e1e2e; color: #CDD6F4 }
+.codehilite { background: #1e1e2e; color: #CDD6F4; padding: 1em; }
 .codehilite .c { color: #9399B2 } /* Comment */
 .codehilite .err { color: #CDD6F4 } /* Error */
 .codehilite .g { color: #CDD6F4 } /* Generic */
