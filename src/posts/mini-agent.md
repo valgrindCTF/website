@@ -102,9 +102,11 @@ Those quirks make `withdraw` the most tempting place to poke around.
 
 I spent a solid chunk of the CTF chasing what looked like a clean bypass for the agent jail (needed to gather more than 10 ether and use withdraw method).
 The thought process:
+
 * `register` only inspects the **runtime** of the agent you submit
-  * must be `< 100` bytes
-  * must not contain the bad opcodes `F0 F1 F2 F4 F5 FF`
+    * must be `< 100` bytes
+    * must not contain the bad opcodes `F0 F1 F2 F4 F5 FF`
+
 * `staticcall` **is not banned** and it doesn’t care about the code size of the target contract.
 * If my tiny agent did nothing but forward its calldata to a beefy implementation with `staticcall`, I could keep the agent small and still run serious logic.
 
@@ -322,11 +324,11 @@ Foundry’s `vm.signDelegation + vm.attachDelegation` pair is a one-shot simulat
 *The same two calls could be reproduced on-chain by submitting an **Intent** tx, but cheat-codes are faster for local PoC.*
 
 * Agent side
-  * An off-line key signs a delegation that lets `MyAgent` run whenever that EOA sends a tx. (But we need to take care that this implementation's **address** doesn't contains byte excluded by the Jail, since following [7702 eip](https://eips.ethereum.org/EIPS/eip-7702#abstract) it does have the implementation address in the bytecode `For each tuple, a delegation indicator (0xef0100 || address) is written to the authorizing account’s code.`).
-  * This keeps `tx.origin == msg.sender` true while still giving us contract logic during battles.
+    * An off-line key signs a delegation that lets `MyAgent` run whenever that EOA sends a tx. (But we need to take care that this implementation's **address** doesn't contains byte excluded by the Jail, since following [7702 eip](https://eips.ethereum.org/EIPS/eip-7702#abstract) it does have the implementation address in the bytecode `For each tuple, a delegation indicator (0xef0100 || address) is written to the authorizing account’s code.`).
+    * This keeps `tx.origin == msg.sender` true while still giving us contract logic during battles.
 
 * Player side
-  * The player’s own EOA signs a second delegation pointing to `MyEOAImplementation`, the contract that will warm the slot and run the re-entrancy.
+    * The player’s own EOA signs a second delegation pointing to `MyEOAImplementation`, the contract that will warm the slot and run the re-entrancy.
 
 ```solidity
 Vm.SignedDelegation memory d1 = vm.signDelegation(agentImpl, agentPk);
