@@ -61,14 +61,14 @@ Your battle bot is a separate contract, but its runtime must satisfy several rul
 * bytecode length under 100 bytes
 * must not contain following opcode bytes
 
-    ```
+```
     0xf0    CREATE
     0xf1    CALL
     0xf2    CALLCODE
     0xf4    DELEGATECALL
     0xf5    CREATE2
     0xff    SELFDESTRUCT
-    ```
+```
 
 If any forbidden byte shows up the whole registration reverts with `Do yourself`.
 
