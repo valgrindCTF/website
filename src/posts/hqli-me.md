@@ -249,9 +249,9 @@ If there's a result, we get 200 response back, otherwise the server responds wit
 
 Let's list what we've got:
 
-- File write and file read in mysql container under `/var/lib/mysql-files/`,
+- file write and file read in mysql container under `/var/lib/mysql-files/`,
 - RCE in `orders_service`,
-- File read oracle in `authn_service`.
+- file read oracle in `authn_service`.
 
 By combining all of these together, we can perform code execution in `orders_service` that will read the flag char by char from `authn_service` and then upload it to mysql container under `/var/lib/mysql-files/`. Afterwards, we can read the uploaded flag. Our exploit script will first upload the oracle script chunk by chunk onto the `orders_service` container, run it and poll for flag in mysql. 
 
