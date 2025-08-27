@@ -10,7 +10,7 @@ author: "VXXDXX"
 
 > Please note that this challenge has no outgoing network access.
 
-Author: irogir  
+Challenge author: irogir  
 Solves: 3
 
 ![Solves](/static/img/posts/2025-sekai-web-hqli-me/hqli-solves.webp)
