@@ -37,6 +37,7 @@ MEMBERS = [
         bio="Skid wannabe hacker",
         facts=["Formerly known as quantum", "Insomniac", "It's pronounced \"Voodoo\"", "Dark mode only"],
         socials=[
+            Social(fa="fa fa-globe", url="https://shellunease.github.io/", name="Website"),
             Social(fa="fab fa-github", url="https://github.com/ShellUnease", name="GitHub"),
             Social(fa="fab fa-discord", url="https://discord.com/users/1193905666876768286", name="Discord"),
             Social(fa="fas fa-cube", url="https://app.hackthebox.com/users/1689134", name="HTB"),
