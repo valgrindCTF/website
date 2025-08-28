@@ -206,7 +206,7 @@ It works!
 
 ---
 
-## File Read Oracle in authn_service
+## 5. File Read Oracle in authn_service
 
 The dist files in `authn_service` contain the file `/root/flag.s` which contains the flag. This file is compiled into an executable binary file `/flag`that prints it out. The file `/root/flag.s` doesn't get removed by the deployment after `/flag` is compiled. Furthermore, the `authn_service` is run as root. One man's trash is another man's treasure.
 
@@ -243,7 +243,7 @@ If there's a result, we get `200` response back; otherwise, the server responds 
 
 ---
 
-## Putting the Pieces Together
+## 6. Putting the Pieces Together
 
 Let's list what we've got:
 
@@ -255,7 +255,7 @@ By combining all of these together, we can perform code execution in `orders_ser
 
 ---
 
-## Solver Script
+## 7. Solver Script
 
 exploit.sh
 
@@ -636,7 +636,7 @@ SEKAI{test_flag}
 
 ---
 
-## Final Notes
+## 8. Final Notes
 
 - You can read the challenge creator's write-up [here](https://github.com/project-sekai-ctf/sekaictf-2025/blob/main/web/hqli-me/solution/e.py). The official solution uses `CSVWRITE` to achieve stacked sqli to create an alias in H2 for RCE. I wasn't aware it was possible,
 - The official solution also uses another method for RCE with `JdiInitiator` via Java code injection. I also came up with yet another way to do it beforehand with `OnError` and heap size JVM flags like so:
