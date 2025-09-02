@@ -100,6 +100,7 @@ document.addEventListener('DOMContentLoaded', function() {
             fetch(formAction, {
                 method: 'POST',
                 body: formData,
+                mode: 'no-cors'
             })
             .catch(error => {
                 console.warn('Fetch encountered an error (ignored by palliative UI):', error);
