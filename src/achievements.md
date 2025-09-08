@@ -15,6 +15,7 @@ tags: []
 - 3rd place in GPN CTF 2025
 - 3rd place in BYUCTF 2025
 - 4th place in TAMUctf 2025
+- 5th place in ImaginaryCTF 2025
 - 5th place in UniVsThreats 25 CTF
 - 6th place in Global Cyber Skills Benchmark CTF 2025: Operation Blackout (HTB Business CTF) as breach.red
 
