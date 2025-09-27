@@ -19,7 +19,9 @@ $\mathcal K={210,336,504,720,990,1320,1716}$
 
 Goal is to reconstruct the curve $y^2=f(x)$, isolate $6X$, read $u$ from $U_{6X}$, then compute $m=\pm\sqrt{f(u)}\in\mathbb F_p$. Converting $m$ to bytes yields the flag
 
+
 ---
+
 
 ## 1. Challenge description
 
@@ -48,7 +50,9 @@ $$
 
 This congruence is the key to recoverv $f$
 
+
 ---
+
 
 ## 3. Reconstructing the curve f(x)
 
@@ -72,7 +76,9 @@ $$
 $$
 
 
+
 ---
+
 
 ## 4. Key idea: isolating 6X
 
@@ -92,7 +98,9 @@ Because we do not know which printed class corresponds to which $k$, we try **al
 
 The true $S=6X$ achieves full coverage we got $\text{score}=7$
 
+
 ---
+
 
 ## 5. Reading (u) from a small multiple
 
@@ -113,6 +121,7 @@ $$
 
 ---
 
+
 ## 6. Recovering m (and the flag)
 
 Evaluate
@@ -123,7 +132,9 @@ $$
 
 Exactly one sign makes ${k\cdot (u,m)}$ match **all** printed classes; that sign is the real $m$. Convert $m$ (big-endian) to bytes → the flag
 
+
 ---
+
 
 ## 7. Step by step solve
 
@@ -134,7 +145,9 @@ Exactly one sign makes ${k\cdot (u,m)}$ match **all** printed classes; that sign
 5. Compute $m=\pm\sqrt{f(u)}$ and pickk the sign that reproduces all seven samples
 6. Decode $m$ as bytes to obtain the flag
 
+
 ---
+
 
 ## 8. Solve
 
@@ -247,7 +260,9 @@ ASIS{hYP3RcURc3S_4rE_w31rd_m4th_bU7_8r0k3n_4_s3cur1ty_n0T4W3aKs!}
 took 11m 36.1s
 ```
 
+
 ---
+
 
 ## 9. Why it works
 
@@ -255,6 +270,10 @@ took 11m 36.1s
 * Bezout + $\gcd=6$ lets us synthesize $6X$ from two unlabeled multiples
 * For $i\le g$, the small-multiple shape $U_{iX}(x)=(x-u)^i$ exposes $u$ via the coefficient of $x^{i-1}$
 * The sign of $m=\pm\sqrt{f(u)}$ is fixed by requiring its multiples to match **all** printed samples
+
+
+---
+
 
 ## 10. Sources i used to solve
 
@@ -265,6 +284,7 @@ https://rkm0959.tistory.com/285
 https://neuromancer.sk/article/25
 
 https://www.ams.org/journals/mcom/1987-48-177/S0025-5718-1987-0866101-0/S0025-5718-1987-0866101-0.pdf
+
 
 
 Much love 💋
