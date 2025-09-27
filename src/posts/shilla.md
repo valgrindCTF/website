@@ -27,7 +27,7 @@ Goal is to reconstruct the curve $y^2=f(x)$, isolate $6X$, read $u$ from $U_{6X}
 
 ## 1. Challenge description
 
-* The server prints 7 lines, each like:
+* The output prints 7 lines, each like:
 
   `(<monic U(x)>, y + <V(x)>)`
   `(<monic U(x)>, y - <V(x)>)`
