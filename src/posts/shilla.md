@@ -7,6 +7,8 @@ tags: ["crypto", "hyperelliptic"]
 author: "Ap4sh"
 ---
 
+---
+
 ## Overview
 
 We are given seven elements of the Jacobian of a large **hyperelliptic** curve over $\mathbb F_p$. Each printed line is a Mumford pair $U(x),,y\pm V(x)$ equal to an unknown base class $X$ multiplied by
@@ -286,6 +288,7 @@ https://neuromancer.sk/article/25
 https://www.ams.org/journals/mcom/1987-48-177/S0025-5718-1987-0866101-0/S0025-5718-1987-0866101-0.pdf
 
 
+---
 
 Much love 💋
 
