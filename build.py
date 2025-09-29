@@ -62,8 +62,8 @@ MEMBERS = [
         name="acters",
         specialties=["osint", "stego"],
         image="acters.webp",
-        bio="that spicy bell pepper lol",
-        facts=["Likes light mode for some horrible reason. You're Not Better Than A Stegosaurus. 🦕"],
+        bio="Living in 45° C weather, and has GPT girlfriends. 🤖 ",
+        facts=["Likes light mode for some horrible reason.", "You're Not Better Than A Stegosaurus. 🦕"],
         socials=[
             Social(fa="fab fa-discord", url="https://discord.com/users/156840430099496960", name="Discord"),
         ],
