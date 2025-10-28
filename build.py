@@ -42,7 +42,7 @@ MEMBERS = [
             Social(fa="fab fa-discord", url="https://discord.com/users/1193905666876768286", name="Discord"),
             Social(fa="fas fa-cube", url="https://app.hackthebox.com/users/1689134", name="HTB"),
         ],
-        countries=["pol"]
+        countries=["pol", "jam"]
     ),
     Member(
         name="N3rdL0rd",
