@@ -182,6 +182,19 @@ MEMBERS = [
         ],
         countries=["esp"]
     ),
+    Member(
+        name="Ectario",
+        specialties=["blockchain", "crypto"],
+        image="ectario.webp",
+        bio="Bipedal mammal making beep boop on a laptop",
+        facts = ["Divin' deep into blockchain components (and occasionally even drowning in it lmao 🫧)"],     
+        socials=[
+            Social(fa="fab fa-discord", url="https://discord.com/users/412711479930912769", name="Discord"),
+            Social(fa="fab fa-github", url="https://github.com/Ectario", name="GitHub"),
+            Social(fa="fab fa-twitter", url="https://x.com/Ectari0", name="Twitter"),
+        ],
+        countries=["fra"]
+    ),
 ]
 
 @dataclass
