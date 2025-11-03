@@ -54,6 +54,7 @@ MEMBERS = [
             Social(fa="fas fa-globe", url="https://n3rdl0rd.xyz/", name="Writeups"),
             Social(fa="fab fa-github", url="https://github.com/N3rdL0rd", name="GitHub"),
             Social(fa="fab fa-discord", url="https://discord.com/users/710879687211089992", name="Discord"),
+            Social(fa="fas fa-cube", url="https://app.hackthebox.com/users/2400888", name="HTB"),
             Social(fa="fas fa-envelope", url="mailto:n3rdl0rd@proton.me", name="Email"),
         ],
         countries=["can", "usa"]
