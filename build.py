@@ -22,7 +22,7 @@ class Social:
 @dataclass
 class Member:
     name: str
-    specialties: List[Literal['rev', 'misc', 'web', 'crypto', 'pwn', 'forensics', 'reversing', 'hardware', 'networking', 'osint', 'stego', 'trivia', 'programming', 'TODO']]
+    specialties: List[Literal['rev', 'misc', 'web', 'crypto', 'pwn', 'forensics', 'reversing', 'hw', 'networking', 'osint', 'stego', 'trivia', 'programming', 'TODO']]
     image: str
     bio: str
     facts: List[str]
@@ -46,15 +46,15 @@ MEMBERS = [
     ),
     Member(
         name="N3rdL0rd",
-        specialties=["rev", "web", "forensics", "misc"],
+        specialties=["rev", "hw", "web", "osint", "misc"],
         image="n3rdl0rd.webp",
         bio="ADHD-fueled maniac pretending to be sane",
         facts=["I made this website!", "I do lockpicking as a hobby.", "Crazy? I was crazy once. They locked me in a room."],
         socials=[
+            Social(fa="fas fa-globe", url="https://n3rdl0rd.xyz/", name="Writeups"),
             Social(fa="fab fa-github", url="https://github.com/N3rdL0rd", name="GitHub"),
             Social(fa="fab fa-discord", url="https://discord.com/users/710879687211089992", name="Discord"),
             Social(fa="fas fa-envelope", url="mailto:n3rdl0rd@proton.me", name="Email"),
-            Social(fa="fas fa-book-open", url="https://github.com/N3rdL0rd/writeups", name="Writeups"),
         ],
         countries=["can", "usa"]
     ),
