@@ -16,6 +16,7 @@ tags: []
 - 3rd place in L3akCTF 2025
 - 3rd place in GPN CTF 2025
 - 3rd place in BYUCTF 2025
+- 3rd place in PwnSec CTF 2025
 - 4th place in TAMUctf 2025
 - 5th place in ImaginaryCTF 2025
 - 5th place in SunshineCTF 2025
