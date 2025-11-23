@@ -1,5 +1,5 @@
 ---
-title: "Web - pspd - PwnSec CTF 2025"
+title: "Web - PSPD - PwnSec CTF 2025"
 date: "2025-11-23"
 excerpt: "Writeup of the web challenge PSPD from PwnSec CTF 2025"
 tags: ["web"]
