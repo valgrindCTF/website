@@ -11,6 +11,7 @@ tags: []
 - 1st place in DawgCTF 2025
 - 1st place in Incognito 6.0
 - 1st place in Iran Tech Olympics CTF 2025
+- 2nd place in HeroCTF v7
 - 2nd place in CrewCTF 2025
 - 2nd place in Break the Syntax CTF 2025
 - 3rd place in L3akCTF 2025
