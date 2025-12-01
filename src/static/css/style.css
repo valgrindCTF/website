@@ -324,12 +324,12 @@ a.tag {
         padding: 1rem; /* Consistent padding for alignment */
     }
 
-    .blog-sidebar {
+    .main-content {
         order: 1;
         padding: 1rem; /* Match padding with content-wrapper */
     }
 
-    .main-content {
+    .blog-sidebar {
         order: 2;
         padding: 1rem; /* Match padding with content-wrapper */
     }
