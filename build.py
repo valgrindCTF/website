@@ -41,6 +41,7 @@ MEMBERS = [
             Social(fa="fab fa-github", url="https://github.com/ShellUnease", name="GitHub"),
             Social(fa="fab fa-discord", url="https://discord.com/users/1193905666876768286", name="Discord"),
             Social(fa="fas fa-cube", url="https://app.hackthebox.com/users/1689134", name="HTB"),
+            Social(fa="fab fa-twitter", url="https://x.com/VXXDXX4XLL", name="X"),
         ],
         countries=["pol", "jam"]
     ),
