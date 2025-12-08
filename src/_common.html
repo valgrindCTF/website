@@ -71,6 +71,25 @@
             <p>JavaScript is disabled. This affects nothing on the site, have a nice day!</p>
         </noscript>
     </footer>
+    <script src="/static/js/medium-zoom-1.1.0.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const articleImages = Array.from(document.querySelectorAll('article img'));
+            if (typeof mediumZoom !== 'function' || articleImages.length === 0) {
+                return;
+            }
+
+            articleImages.forEach(img => {
+                mediumZoom(img, {
+                    background: 'rgba(128, 128, 128, 0.5)',
+                    margin: 0,
+                    scrollOffset: 40,
+                    container: null,
+                    template: null
+                });
+            });
+        });
+    </script>
     {% block scripts %}{% endblock %}
     <script>
         document.addEventListener('keydown', function(e) {
