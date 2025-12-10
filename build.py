@@ -22,7 +22,7 @@ class Social:
 @dataclass
 class Member:
     name: str
-    specialties: List[Literal['rev', 'misc', 'web', 'crypto', 'pwn', 'forensics', 'reversing', 'hw', 'networking', 'osint', 'stego', 'trivia', 'programming', 'TODO']]
+    specialties: List[Literal['rev', 'misc', 'web', 'crypto', 'pwn', 'forensics', 'reversing', 'hw', 'networking', 'osint', 'stego', 'trivia', 'programming', 'boot2root', 'TODO']]
     image: str
     bio: str
     facts: List[str]
@@ -156,14 +156,15 @@ MEMBERS = [
     ),
     Member(
         name="Ap4sh",
-        specialties=["crypto", "misc", "web", "forensics"],
+        specialties=["boot2root", "crypto", "web", "misc"],
         image="ap4sh.webp",
         bio="ADHD brain powered by music",
         facts=["my search history would worry a normal person"],
         socials=[
-            Social(fa="fa fa-globe", url="https://ap4sh.guru/", name="Website"),
+            Social(fa="fa fa-globe", url="https://ap4.sh/", name="Website"),
             Social(fa="fab fa-discord", url="https://discord.com/users/1032261229626003537", name="Discord"),
             Social(fa="fas fa-cube", url="https://app.hackthebox.com/users/377742", name="HTB"),
+            Social(fa="fas fa-brain", url="https://cryptohack.org/user/Ap4sh/", name="CryptoHack"),
         ],
         countries=["fra"]
     ),
