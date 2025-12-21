@@ -295,7 +295,12 @@ def generate_tag_pages(site, posts):
                 suffix = {1: "st", 2: "nd", 3: "rd"}.get(n % 10, "th")
             return f"{n}{suffix}"
 
-r = requests.get("https://ctftime.org/api/v1/teams/355817/")
+r = requests.get(
+    "https://ctftime.org/api/v1/teams/355817/",
+    headers={
+        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.10 Safari/605.1.1"
+    },
+)
 if r.status_code == 200:
     team_data = r.json()
     rating = team_data['rating'][str(datetime.now().year)]["rating_place"]
