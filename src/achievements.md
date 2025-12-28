@@ -24,6 +24,7 @@ tags: []
 - 5th place in SunshineCTF 2025
 - 5th place in UniVsThreats 25 CTF
 - 6th place in Global Cyber Skills Benchmark CTF 2025: Operation Blackout (HTB Business CTF) as breach.red
+- 6th place in ASIS CTF Finals 2025
 
 ## 2024
 
