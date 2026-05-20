@@ -14,7 +14,7 @@ author: Ap4sh
 
 Ghostlink was the fullpwn box from Hack The Box Business 2026,
 
-It had a pretty long but clean chain:
+It had a pretty long but clean chain, TL;DR:
 
 ```text
 MQTT write -> NTLM coercion -> GhostSurf relay -> authenticated LFI
@@ -710,6 +710,6 @@ smbclient.py -hashes ':8190e067f478002ddd63eb209b016696' ghostlink.htb/Administr
 
 ---
 
-Much love ≡ƒÆï
+Much love 💋
 
 Ap4sh
