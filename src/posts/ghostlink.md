@@ -12,7 +12,7 @@ author: Ap4sh
 
 ## Overview
 
-Ghostlink was the fullpwn box from Hack The Box Business 2026,
+Ghostlink was a had fullpwn box from Hack The Box Business 2026,
 
 It had a pretty long but clean chain, TL;DR:
 
