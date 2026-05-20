@@ -13,7 +13,7 @@ author: Ap4sh
 
 ## Overview
 
-Odyssey was a hard fullpwn box from HTB business CTF 2026.
+Odyssey was an insane fullpwn box from HTB business CTF 2026.
 
 The public surface was only a Node/Express web app on port `3000`, but the box slowly unfolded into a full internal Windows domain, TL;DR:
 
@@ -27,7 +27,7 @@ The public surface was only a Node/Express web app on port `3000`, but the box s
 - reverse AegisStream -> Operator key -> YAML deserialization RCE
 - `svc-aegis-stream` DCSync rights -> domain compromise -> `root.txt`
 
-Fun part is that the challenge keeps changing style: classic web bug, then Linux pivoting, then SQL/NTLM, then modern Windows Server 2025 dMSA abuse, and finally a custom .NET named pipe service.
+Fun part is that the challenge keeps changing style: classic web bug, then Linux pivoting, then SQL/NTLM, then modern Windows Server 2025 dMSA abuse, and finally a custom .NET named pipe service. A LOT of things, and a very, very long insane box.
 
 ---
 
