@@ -15,7 +15,7 @@ author: Ap4sh
 
 Odyssey was a hard fullpwn box from HTB business CTF 2026.
 
-The public surface was only a Node/Express web app on port `3000`, but the box slowly unfolded into a full internal Windows domain:
+The public surface was only a Node/Express web app on port `3000`, but the box slowly unfolded into a full internal Windows domain, TL;DR:
 
 - WebAuthn logic bug -> admin session
 - LaTeX render file read -> diagnostic token leak
@@ -810,6 +810,6 @@ nxc winrm 127.0.0.1 -d ODYSSEY.HTB -u Administrator -H '<administrator_nt_hash>'
 
 ---
 
-Much love ≡ƒÆï
+Much love 💋
 
 Ap4sh
