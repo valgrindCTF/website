@@ -31,7 +31,7 @@ register/login
 -> /usr/local/bin/readflag
 ```
 
-The "hardest" part is that the challenge does not have an upload feature, the write primitive comes from Rack itself which is 
+The "hardest" part is that the challenge doesn't have an upload feature, the write primitive comes from Rack itself, which was a super interesting thing to discover!
 
 There was also an HTTPS service on `127.0.0.1:8080` and a weird `ref` parser that could lead into raw localhost sockets. I spent time looking at it, but I did not need it for the final chain..
 
