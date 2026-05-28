@@ -5,6 +5,10 @@ excerpt: "A list of our top CTF achievements"
 tags: []
 ---
 
+## 2026
+
+- 1st place in Global Cyber Skills Benchmark CTF 2026: Project Nightfall (HTB Business CTF) as PrimeRanks
+
 ## 2025
 
 - 1st place in TryHackMe Industrial Intrusion
