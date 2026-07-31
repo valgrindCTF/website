@@ -7,8 +7,8 @@ tags: []
 
 ## 2026
 
-- 3rd place in Cyber Apocalypse CTF 2026: The Salt Crown (HTB Cyber Apocalypse CTF)
 - 1st place in Global Cyber Skills Benchmark CTF 2026: Project Nightfall (HTB Business CTF) as PrimeRanks
+- 3rd place in Cyber Apocalypse CTF 2026: The Salt Crown (HTB Cyber Apocalypse CTF)
 
 ## 2025
 
